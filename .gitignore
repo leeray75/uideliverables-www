@@ -30,3 +30,4 @@ node_modules
 .tsdrc
 
 *.sublime-*
+content/images/movie-posters/**/*
