@@ -1,0 +1,280 @@
+@import "import-UI-styles.less";
+#TemplateSpinner{ padding: 50px 0 50px 0; text-align: center;}
+#MoviesAppRow,
+#MoviesSideNavColumn{ margin: 0px; padding: 0px;}
+#Movie-Page-Title{
+	text-align: center;
+	border-bottom: 1px dashed @UI_Grey;	
+	margin-bottom: 10px;
+}
+.movie-top-copy{
+	border-bottom: 1px dashed @UI_Grey;	
+	margin-bottom: 10px;
+}
+#HTTP-SUCCESS,
+.error-container{ 
+	color: #f00; 
+	border-bottom: 1px dashed @UI_Grey;	
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+.error-msg{ color: #f00;}
+#HTTP-SUCCESS{ color: #090; display: none;}
+#FORM-ERROR ul{ margin-left: 1em !important;}
+#HTTP-ERROR.error-container > ul{ display: block;}
+#HTTP-ERROR.error-container > ul > ul{ display: inline; }
+#HTTP-ERROR.error-container li{ display: inline; margin-right: 1em;}
+
+#MoviesMainViewColumn{ border-left: 1px dashed @UI_Grey; }
+#MoviesListView{
+	width: 100%;
+	font-family: 'Play', sans-serif;
+	margin: 20px auto 20px auto;
+	padding: 20px 0 20px 0;
+	border: 1px solid #03C;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+#MoviesListView ul#movies-list
+{ 
+	width: 100%;
+	list-style: outside none none;
+}
+#MoviesListView ul#movies-list li
+{ 
+	margin-bottom: 20px; padding-top: 20px;  border-top: 1px solid #999; 
+
+
+}
+.movie-list-item-container
+{ width: 90%; margin: 0 auto 0 auto; }
+#MoviesListView ul#movies-list > li:first-child{ border-top: none; }
+.movie-list-item-container .edit-delete-links{ margin-top: 10px;}
+
+.movie-list-item-container .movie-title{ font-size: 1.5em; font-weight: bold; }
+.movie-list-item-container .edit-delete-links{ text-align: center;}
+.movie-list-item-container .movie-label{ font-weight: bold;}
+.movie-list-item-container .ratings-container .row{ text-align:right;}
+.movie-list-item-container .ratings-container .row.imdb-votes{ text-align: right;}
+.movie-list-item-container .ratings-container .votes-count{ font-size: 12px; }
+
+.movie-list-item-container .plot{
+	line-height: 1.5em;
+	padding: 10px 20px 10px 20px;
+	margin-top: 20px;
+	border-top: 1px solid @UI_Grey;	
+	border-bottom: 1px solid @UI_Grey;	
+	
+}
+.movie-list-item-container .additional-info-rows{ margin-top: 20px;}
+#MovieTitlesSearchForm{ display: block; width: 100%; border-bottom: 1px solid #999; padding-bottom: 20px; }
+#MovieTitlesSearchForm .movie-search-field{ width: 90%; margin: 0 auto 0 auto; text-align: center; }
+#MovieTitleSearchFilterField { width: 50%; border: 1px solid #000; margin-left: 5px;
+-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+#MovieTitlesSearchForm .glyphicon{ color: #000; }
+/* RateiIt plugin style */
+
+.rateit-range{ height: 16px; overflow: hidden;}
+button.rateit-reset{ display: none !important;}
+
+#MoviesListView ul{
+    border: 0 none;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;	
+}
+
+#MoviesListView .clear-fix:after{
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+#MoviesNavContainer ul{
+	list-style: none;
+	width: 100%; margin: 0 auto 0 auto;
+}
+#MoviesNavContainer ul li { display: block; width: 100%; margin-bottom: 20px;}
+#MoviesNavContainer ul li.nav-link-item a{
+	width: 100px;
+	color: #062a53;
+	display: block;
+	height: 101px;
+	line-height: 80px;
+	vertical-align: middle;
+	margin: 0 auto 10px auto;
+	border:1px solid #999;
+	padding:5px;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	-opera-border-radius:8px;
+	border-radius:8px;
+	-moz-box-shadow:5px 5px 5px #888888;
+	-webkit-box-shadow:5px 5px 5px #888888;
+	box-shadow: 5px 5px 5px #888888;	
+	background: #fff;
+  	background: -webkit-linear-gradient(#FFF, @UI_Grey); /* For Safari 5.1 to 6.0 */
+  	background: -o-linear-gradient(#FFF, @UI_Grey); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(#FFF, @UI_Grey); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(#FFF, @UI_Grey); /* Standard syntax */	
+}
+@media (max-width: 399px) {
+#MoviesNavContainer ul.movies-navbar li.movies-brand-logo { display: none; }	
+#MoviesNavContainer ul li.nav-link-item a{
+	width: 100%;
+	font-size: 12px;	
+}
+}
+
+#MoviesNavContainer ul li.nav-link-item a:hover{
+	background: @UI_Grey;
+  	background: -webkit-linear-gradient(@UI_Grey, #999); /* For Safari 5.1 to 6.0 */
+  	background: -o-linear-gradient(@UI_Grey, #999); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(@UI_Grey, #999); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(@UI_Grey, #999); /* Standard syntax */
+	
+}
+#MoviesNavContainer ul li.nav-link-item.active a{
+	background: #062a53;
+  	background: -webkit-linear-gradient(#062a53, #039); /* For Safari 5.1 to 6.0 */
+  	background: -o-linear-gradient(#062a53, #039); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(#062a53, #039); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(#062a53, #039); /* Standard syntax */	
+	border-color: #204d74;
+	color: #fff;
+	cursor: default;
+}
+#MoviesNavContainer ul li.nav-link-item  a .glyphicon{
+	color: #062a53; font-size: .8em;
+}
+#MoviesNavContainer ul li.nav-link-item.active .glyphicon
+{ color: #fff; }
+
+#Movie-Collapse-Menu{ margin-bottom: 10px; width: 100%; float: left; text-align: center;}
+img.movie-logo{
+	margin: 0 auto 0 auto;
+	max-height: 100px;
+	border:1px solid #999;
+	padding:5px;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	-opera-border-radius:8px;
+	border-radius:8px;
+	-moz-box-shadow:5px 5px 5px #888888;
+	-webkit-box-shadow:5px 5px 5px #888888;
+	box-shadow: 5px 5px 5px #888888;
+}
+ul.movies-navbar li{ margin: 0 auto 0 auto; width: 100%;}
+
+@media (max-width: 995px) {
+	#MoviesNavContainer .movies-brand-logo{ display: inline-block; width: 100px; margin: 0 0 0 10px;}
+	#MoviesNavContainer ul.movies-navbar{ width: auto; float: left;}
+	#MoviesNavContainer ul.movies-navbar li{ width: 100px; float: left; margin: 0 0 0 10px; }
+	#Movie-Collapse-Menu{ display: inline-block; width: auto;}
+	#MoviesNavContainer li{ margin-right: 20px;}
+}
+@media (max-width: 767px) {
+	#Movie-Collapse-Menu{ width: 100%;}
+	#MoviesListView .ratings-container .row{ text-align:left}
+	#MoviesListView .ratings-container .row.imdb-votes{ text-align: left;}
+	#MoviesNavContainer a{
+		margin-bottom: 10px;
+	}
+	.image-col img{ max-height: 300px; margin: 0 auto 0 auto;}
+}
+ @media screen and (max-width: 360px) {
+	#MoviesListView .ratings-container .row{ text-align:left}
+	#MoviesListView .ratings-container .row.imdb-votes{ text-align: left;}
+	.image-col img{ max-height: 200px; margin: 0 auto 0 auto;}
+
+}
+#Add-Edit-Movie{ display: block;}
+#Movie-Preview-Container{ display: block; }
+#Add-Edit-Movie .input-row{ margin-bottom: 10px; }
+#Add-Edit-Movie .label-col{ text-align: right; }
+#Add-Edit-Movie .label-col label{ }
+#Add-Edit-Movie .input-col{ text-align: left;}
+#Add-Edit-Movie .input-col input[type="text"]{ width: 80%; }
+#Add-Edit-Movie textarea#plot{ width: 80%; height: 10em;}
+
+#Movie-Preview-Container .button-container,
+#Add-Edit-Movie .button-container{ text-align: center;}
+#Movie-Preview-Container #Movie-Poster.noBorder{ border: none;}
+#Movie-Preview-Container #Movie-Poster{ 
+	width: 100%;
+	border: 1px dashed #f00;
+	min-height: 125px;
+	min-width: 125px;
+	padding: 10px;
+}
+#Movie-Preview-Container #Movie-Poster:hover{
+	border-color: #00f;
+}
+#Movie-Preview-Container .button-container { margin-top: 20px; padding-top: 20px; border-top: 1px solid #999;}
+.editable-item form input{ width: 100% !important;}
+.editable-item textarea{ width: 100% !important; height: 10em !important;}
+
+#Movie-Preview-Container .editable:focus{
+	background: #FF9;	
+}
+
+#Movie-Preview-Container .editable,
+#Movie-Preview-Container .editable-text, 
+#Movie-Preview-Container .editable-date,
+#Movie-Preview-Container .editable-textarea, 
+#Movie-Preview-Container #Editable-Select-Rated{ color: #f00;}
+
+#Movie-Preview-Container .editable-text:hover, 
+#Movie-Preview-Container .editable-date:hover,
+#Movie-Preview-Container .editable-textarea:hover, 
+#Movie-Preview-Container #Editable-Select-Rated:hover{color: #00f;}
+
+#Movie-Preview-Container .editable-text form, 
+#Movie-Preview-Container .editable-date form,
+#Movie-Preview-Container .editable-textarea form, 
+#Movie-Preview-Container #Editable-Select-Rated form{ display: inline; color: #000;}
+
+#Movie-Preview-Container form input{min-height: 1.5em; }
+#Movie-Preview-Container .movie-title form input{  width: 50% !important;}
+#Movie-Preview-Container .run-time form input{ width: 5em !important;}
+#Movie-Preview-Container .release-date  form input{ width: 100px!important; }
+
+.movie-top-copy span.editable-color{ color: #f00; font-weight: bold;}
+.movie-top-copy span.add-label-text{ color: #337ab7; font-weight: bold; }
+.movie-top-copy span.reset-label-text { color: #f0ad4e; font-weight: bold; }
+.movie-top-copy span.edit-label-text{ color: #5bc0de; font-weight: bold;}
+
+
+#DETAILS-CONTENT{}
+#DETAILS-CONTENT .accordion {
+    margin-bottom: 20px;
+}
+#DETAILS-CONTENT .accordion-group {
+    border: 1px solid #333;
+    border-radius: 4px;
+    margin-bottom: 2px;
+}
+#DETAILS-CONTENT .accordion-heading {
+    border-bottom: 0 none;
+	background-color: @UI_Grey;
+}
+#DETAILS-CONTENT .accordion-heading a{ color: #062a53; text-decoration: none; font-weight: bold;}
+#DETAILS-CONTENT .accordion-heading a:hover{ text-decoration: none; background: #999;}
+#DETAILS-CONTENT .accordion-heading .accordion-toggle {
+    display: block;
+    padding: 8px 15px;
+}
+#DETAILS-CONTENT .accordion-toggle {
+    cursor: pointer;
+}
+#DETAILS-CONTENT .accordion-inner {
+    border-top: 1px solid #e5e5e5;
+    padding: 9px 15px;
+}
+#DETAILS-CONTENT .line-code{ font-weight: bold;}

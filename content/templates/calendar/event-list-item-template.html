@@ -1,0 +1,61 @@
+<script type="text/template" id="Event-List-Item-Template">
+<%
+    var startDateArray = start.split(" ");
+    var startDate = (startDateArray[0].length > 0) ? startDateArray[0] : GlobalVariables.CurrentDate.split(" ")[0];
+    var endDateArray = end.split(" ");
+    var endDate = (endDateArray[0].length > 0) ? endDateArray[0] : GlobalVariables.CurrentDate.split(" ")[0];
+    var StartTime = (startDateArray[0].length > 0) ? startDateArray[1] : "01:00:00";
+    var EndTime = (endDateArray[0].length > 0) ? endDateArray[1] : "01:00:00";
+    var location = location || "";
+    var dateArray = startDate.split("-");
+    var isAllDay = allDay == true ? "Yes" : "No";
+    var closeButtonClass = (isEditable == 1) ? "closeButton1" : "closeButton2";
+    startDate = dateArray[1] + "/" + dateArray[2] + "/" + dateArray[0];
+    dateArray = endDate.split("-");
+    endDate = dateArray[1] + "/" + dateArray[2] + "/" + dateArray[0];
+    var dateString = (startDate == endDate) ? startDate : startDate + " - " + endDate;
+    StartTime = getFormattedTime(StartTime);
+    EndTime = getFormattedTime(EndTime);
+    var timeString = allDay ? "All Day" : StartTime + " - " + EndTime;
+    title = title.replace(/"/g, '&quot;');
+    location = location.replace(/"/g, '&quot;');
+    description = description.replace(/"/g, '&quot;');
+    description = description.replace(/\n/g, '<br />');
+    var eventType = (isEditable == 1) ? "editable" : "non-editable";
+    var image = new Image();
+    var hasImage = true;
+    image.onerror = function() {
+        hasImage = false;
+    };
+	//image.src = "/www/php/upload/"+id+".jpg";
+	//console.log('Event list item template: '+ title);
+
+%>
+<div id="EventListItem-<%= id %>" class="event-list-item-container <%= eventType %>">
+	<div class="date"><%= dateString %> <span class="time">(<%= timeString %>)</span>
+	<% if(!user.get("isGuest")){ %>
+	<div class="icons-container">
+		<a href="#" class="action-events-icon add-event" title="Add Event">&nbsp;</a>
+		<% if(isEditable==1){ %>
+		<a href="#" class="action-events-icon delete-event" title="Delete Event">&nbsp;</a>
+		<a href="#" class="action-events-icon edit-event" title="Edit Event">&nbsp;</a>
+		<% } %>
+	</div>
+	<!-- /icons-container -->
+	<% } %>
+	
+	</div>
+	<!-- /date -->
+	<div class="title"><%= title %></div>
+	<% if(location.length>0){ %>
+	<div class="location">Location: <%= location %></div>
+	<% } %>
+	<% if(description.length>0){ %>
+	<div class="description">Description: 
+		<div class="description-data"><%= description %></div>
+	</div> 
+	<% } %>
+
+</div>
+<!-- /event-list-item-container -->
+  </script>

@@ -1,0 +1,68 @@
+var EventListItemView = Backbone.View.extend({
+    tagName: "div",
+    template: null,
+    events: {
+        "click .add-event": "addEvent",
+        "click .delete-event": "deleteEvent",
+        "click .edit-event": "editEvent"
+    },
+    initialize: function() {
+        this.template = _.template($('#Event-List-Item-Template').html())
+        this.listenTo(this.model, 'change', this.render);
+        this.listenTo(this.model, 'destroy', this.remove);
+        this.id = '#EventListItem-' + this.model.get("id");
+        this.$el = $('#EventListItem-' + this.model.get("id"));
+    },
+    render: function() {
+        var jsonModel = this.model.toJSON();
+        var template = this.template(jsonModel);
+        this.$el.html(template);
+        var endDateVal = this.model.get("end")
+
+        if (this.$el.exists()) {
+            this.$el.replaceWith(template);
+        } else {
+            $('#active-events-list').append(template);
+        }
+        this.initEvents();
+
+        return this;
+    },
+    initEvents: function() {
+        var thisObj = this;
+        $(this.id + " .add-event").off('click.add');
+        $(this.id + " .add-event").on('click.add', function(event) {
+            thisObj.addEvent();
+            return false;
+        });
+        $(this.id + " .edit-event").off('click.edit');
+        $(this.id + " .edit-event").on('click.edit', function(event) {
+            thisObj.editEvent();
+            return false;
+        });
+        $(this.id + " .delete-event").off('click.delete');
+        $(this.id + " .delete-event").on('click.delete', function(event) {
+            thisObj.deleteEvent();
+            return false;
+        });
+    },
+    destroy: function() {
+
+    },
+    addEvent: function() {	
+        App.Calendar.select(new Date(), new Date());
+    },
+    editEvent: function() {
+        var AddEditEventModalOverlay = new AddEditEventModalOverlayView({
+            model: this.model
+        });
+        AddEditEventModalOverlay.render();
+    },
+    deleteEvent: function() {        	
+        var DeleteEventModalOverlay = new DeleteEventModalOverlayView({
+            model: this.model
+        });
+        DeleteEventModalOverlay.render();
+    }
+
+}); // end EventListItemView

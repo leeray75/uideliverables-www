@@ -1,0 +1,197 @@
+@import "import-UI-styles.less";
+body { 
+    padding-top: 70px;
+    background: #fff;
+	.responsive((@UI_Media_md), {
+			font-size: 12px
+    });  
+}
+footer {
+	padding: 2em 0;
+	margin: 3em 0 0 0;
+	border-top: 1px solid #ddd;
+	color: @UI_Blue;
+	text-align: center;
+
+}
+h1{ font-size: @UI_H1; }
+h2{ font-size: (@UI_H1 - 4);}
+h3{ font-size: (@UI_H1 - 8);}
+h4{ font-size: (@UI_H1 - 12);}
+
+.tab-pane {
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;	
+	border-bottom: 1px solid #ddd;
+	padding: @UI_Spacing;
+}
+
+.panel-default {
+    border-color: #3F2B22;
+    > .panel-heading {
+        background-color: #cdae51;
+        border-color: #3F2B22;
+        color: #fff;
+    }
+}
+.breadcrumb > li + li:before {
+  content: none;
+}
+
+/* Begin Top Global Nav */
+
+#UI-Deliverables-Nav.navbar-inverse {
+    background-color: @UI_Grey;
+    border-color: #333;
+    .navbar-nav > li > a {
+        color: @UI_Blue;
+    }    
+}
+#UI-Deliverables-Nav .ui-logo{ 
+	padding: 2px 10px 2px 10px;; max-width: 50%; float: left; 
+	.responsive((@UI_Media_md + 1px), {
+		padding: 2px 10px 2px 10px; width: 30%; float: left; 
+    });
+	
+}
+#UI-Deliverables-Nav .ui-logo-lg{
+	.responsive((@UI_Media_md + 1px), {
+			display: block;
+    }); 
+    .responsive((@UI_Media_sm - 1px), {
+			display: block;
+    }); 
+    .responsive(370px, {
+			display: none;
+    }); 
+}
+
+#UI-Deliverables-Nav .ui-logo-sm{
+	.responsive((@UI_Media_md + 1px), {
+			display: none;
+    }); 
+    .responsive((@UI_Media_sm - 1px), {
+			display: none;
+    }); 
+    .responsive(370px, {
+			display: block;
+    });
+}
+
+#collapse{ float: right; 
+    .responsive((@UI_Media_sm - 1px), {
+			float: none;  width: 100%; margin: 0; padding: 0;
+    });     
+}
+#UI-Deliverables-Nav .navbar-nav{ margin: 0px; }
+#UI-Deliverables-Nav.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    .responsive((@UI_Media_sm - 1), {
+		color: @UI_Blue;
+		&:hover{
+		    background: @UI_Nav_TextHoverColor;   
+	   }});
+}
+#UI-Deliverables-Nav.navbar-default.navbar-inverse .navbar-nav > li > a:hover{
+	background: #999;
+	color: #000;
+}
+
+#UI-Deliverables-Nav.navbar-default.navbar-inverse .navbar-nav > li > a.navbar-brand:hover{
+	background: none;	
+}
+
+#UI-Deliverables-Nav .ui-navbar-item .navbar-brand{ padding-top: 4px; padding-bottom: 0px;}
+#UI-Deliverables-Nav.navbar-inverse .navbar-toggle {
+	color: white;
+	font-weight: bold;
+	border-color: white;
+}
+
+#UI-Deliverables-Nav.navbar-inverse .navbar-toggle{
+	background-color: @UI_Blue;
+	border-color: #fff;
+}
+#UI-Deliverables-Nav.navbar-default .navbar-toggle .icon-bar{
+	background-color: @UI_Grey;
+}
+
+#UI-Deliverables-Nav.navbar-inverse .navbar-toggle:hover{
+	background: #337ab7;
+}
+
+#UI-Deliverables-Nav.navbar-inverse .navbar-toggle:hover .icon-bar{
+	background-color: @UI_Nav_TextHoverColor;
+}
+#UI-Deliverables-Nav .glyphicon{
+	 color: @UI_Blue;
+}
+
+#UI-Deliverables-Nav.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #999;
+}
+
+/* Begin Modal Styles */
+.ui-deliverables-modal.modal {
+    .modal-header{ 
+        background-color: @UI_Blue;
+        h4{
+            color: #fff;
+            font-weight: bold;
+        }
+        .close{
+        	color: #fff; font-weight: bold;	opacity: .8;
+        }
+    } /* end .modal-header */
+    .modal-body{ 
+        min-height: 100px; 
+        .input-container{
+            label{ cursor: pointer; }
+            > div.row{ margin-top: @UI_Spacing;}
+            > div.row:nth-child(1) { margin-top: 0px; }
+            .labels-column{ text-align: right; }
+            .labels-column label{ padding-top: 3px;}
+            .input-column input[type=email],
+            .input-column input[type=password],
+            .input-column input[type=text]{ width: 80%; }
+        } /* end input-container */
+    } /* end modal-body */
+    .modal-footer{  background-color: @UI_Grey; }
+    
+}
+/* End Modal Styles */
+
+/* Bootstrap Tabs */
+#content{
+    .nav-tabs {
+        > li > a{ border: 1px solid #ddd; border-bottom: none;   
+            background-color: @UI_Grey;
+            color: @UI_Blue;
+        }
+        > li.active > a{
+            background-color: #fff;
+        }
+    }
+    .tab-pane{
+        padding: @UI_Spacing *2;
+        border: 1px solid #ddd;
+        border-top: none;
+        .clear-fix;             
+    }
+}
+
+/* Begin Login Module */
+#UI-Login-Module{
+    #LoginSpinner{ text-align: center;}
+    #LoginSpinner img{ margin-top: 25px;}
+    #LoginSuccess{ text-align: center; color: @UI_Success; margin-top: 25px; font-weight: bold;}
+    .error-msg{ color: #f00; }
+    .top-error-message{ text-align: center; width: 80%; margin: 0 auto @UI_Spacing auto;}
+}
+
+@media print {
+	body{ padding-top: 0px;}
+	#sharebar,
+	img.sharebar-logo,
+	.breadcrumbs,
+	footer{display: none; }
+}

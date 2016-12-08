@@ -1,0 +1,47 @@
+<?php
+
+class Messages extends CActiveRecord
+{
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
+
+	public function tableName()
+	{
+		return Yii::app()->controller->module->messagesTable 
+			? Yii::app()->controller->module->messagesTable 
+			: 'messages';
+	}
+
+	public function rules()
+	{
+		return array(
+			array('from, to, title', 'required'),
+			array('from, to', 'numerical', 'integerOnly'=>true),
+			array('title', 'length', 'max'=>45),
+			array('message', 'safe'),
+			array('id, from, to, title, message', 'safe', 'on'=>'search'),
+		);
+	}
+
+	public function relations()
+	{
+		return array(
+			'from_user' => array(self::BELONGS_TO, 'User', 'from'),
+			'to_user' => array(self::BELONGS_TO, 'User', 'to'),
+		);
+	}
+
+	public function attributeLabels()
+	{
+		return array(
+			'id' => '#',
+			'from' => 'From',
+			'to' => 'To',
+			'title' => 'Title',
+			'message' => 'Message',
+		);
+	}
+
+}

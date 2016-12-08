@@ -1,0 +1,299 @@
+<script type="text/template" id="AddEdit-Event-ModalOverlay-Template">
+<%
+	var showRemoveLink = false;
+	try{
+		showRemoveLink = !(id==null);
+	}catch(e){ showRemoveLink = false; }
+	var startDateArray = start.split(" ");	
+	var startDate = (startDateArray[0].length>0) ? startDateArray[0] : GlobalVariables.CurrentDate.split(" ")[0];				
+	var endDateArray = end.split(" ");
+	var endDate =  (endDateArray[0].length>0) ? endDateArray[0] : GlobalVariables.CurrentDate.split(" ")[0];		
+	var StartTime = (startDateArray[0].length>0) ? startDateArray[1] : "01:00:00";		
+	var EndTime = (endDateArray[0].length>0) ? endDateArray[1] : "01:00:00";
+	var location = location || "";	
+	var dateArray = startDate.split("-");
+	var isAllDayCheckedProp = allDay==true ? " checked='checked' " : "";
+	startDate = dateArray[1]+"/"+dateArray[2]+"/"+dateArray[0];
+	dateArray = endDate.split("-");
+	endDate = dateArray[1]+"/"+dateArray[2]+"/"+dateArray[0];
+	
+	StartTime = getFormattedTime(StartTime);
+	EndTime = getFormattedTime(EndTime);
+	title = title.replace(/"/g, '&quot;');
+	location = location.replace(/"/g, '&quot;');
+	description = description.replace(/"/g, '&quot;');
+
+
+%>
+<div id="AddEditEventModal" class="ui-deliverables-modal modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="AddEditEventForm">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal(UILoginForm);"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Event Details</h4>
+        </div>
+		<!-- /.modal-header -->
+        <div class="modal-body"> 
+		<div class="input-container">
+		<!-- ### BEGIN INPUT FIELDS ### -->
+                <div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label for="title">Title</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input maxlength="250" id='title' class="input-field" type="text" value="<%= title %>" />
+                  </div>
+                </div>			
+                <div class="row all-day-row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label for="AllDay">All Day</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input type="checkbox" name="AllDay" id="AllDay" value="1" <%= isAllDayCheckedProp %> />
+                  </div>
+                </div>	
+                <div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label for="StartDate">Start Date:</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input type="text" name="StartDate" id="StartDate" class="startDate calendar" readonly='readonly' value="<%= startDate %> <%= StartTime %>" />
+                  </div>
+                </div>			
+				<div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label for="EndDate">End Date:</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input type="text" name="EndDate" id="EndDate" class="endDate calendar" readonly='readonly' value="<%= endDate %> <%= EndTime %>" />
+                  </div>
+                </div>	
+				<div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label for="location">Location:</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input maxlength="250" name="location" id='location' class="input-field" type="text" value="<%= location %>" />
+                  </div>
+                </div>		
+				<div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<label for="description">Description:</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+						<textarea id="description" class="text-area" maxlength="500"><%= description %></textarea>
+			  			<div class="counter-line">(<span id="description-counter"></span> characters remaining)</div>                    
+                  </div>
+                </div>											
+									
+
+<!--
+            <div class="row">
+              <label>File:</label>
+              <div class="input-container">
+                <input maxlength="250" id='file' class="input-field" type="file" accept="image/*" value="" />
+              </div>
+            </div>
+-->
+	
+		
+		<!-- ### END INPUT FILEDS ### -->
+		</div>
+		<!-- /.input-container -->
+		</div>
+        <!-- .modal-body -->
+        <div class="modal-footer">
+           <div class="buttons-container"> 
+			   <div class="col-xs-2">
+				<% if(showRemoveLink){ %>
+					<button type="button" class="btn btn-danger delete-model-link">Remove</button>
+				<% } %>
+				</div>
+				<div class="col-xs-10">		   
+					<button type="button" data-dismiss="modal" class="btn btn-default cancelButton">Cancel</button>
+					<button type="button" class="btn btn-primary do-save-link saveButton">Save</button> 
+				</div>
+			</div>
+            <!-- /buttonsContainer -->		
+		  </div> <!-- /.modal-footer -->
+        
+      </form>
+    </div>
+    <!-- /.modal-content --> 
+    
+  </div>
+  <!-- /.modal-dialog --> 
+</div>
+<!-- /.modal --> 
+</script>
+  <!-- /AddEdit-Event-ModalOverlay-Template -->
+<script type="text/template" id="Display-Event-ModalOverlay-Template">
+<%
+	var showRemoveLink = false;
+	try{
+		showRemoveLink = !(id==null);
+	}catch(e){ showRemoveLink = false; }
+	var startDateArray = start.split(" ");	
+	var startDate = (startDateArray[0].length>0) ? startDateArray[0] : GlobalVariables.CurrentDate.split(" ")[0];				
+	var endDateArray = end.split(" ");
+	var endDate =  (endDateArray[0].length>0) ? endDateArray[0] : GlobalVariables.CurrentDate.split(" ")[0];		
+	var StartTime = (startDateArray[0].length>0) ? startDateArray[1] : "01:00:00";		
+	var EndTime = (endDateArray[0].length>0) ? endDateArray[1] : "01:00:00";
+	var location = location || "";	
+	var dateArray = startDate.split("-");
+	var isAllDay = allDay==true ? "Yes" : "No";
+	var closeButtonClass = (isEditable==1) ? "closeButton1" : "closeButton2";
+	startDate = dateArray[1]+"/"+dateArray[2]+"/"+dateArray[0];
+	dateArray = endDate.split("-");
+	endDate = dateArray[1]+"/"+dateArray[2]+"/"+dateArray[0];
+	
+	StartTime = getFormattedTime(StartTime);
+	EndTime = getFormattedTime(EndTime);
+	title = title.replace(/"/g, '&quot;');
+	location = location.replace(/"/g, '&quot;');
+	description = description.replace(/"/g, '&quot;');
+	
+
+
+%>
+<div id="DisplayEventModal" class="ui-deliverables-modal modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="AddEditEventForm">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal(UILoginForm);"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Event Details</h4>
+        </div>
+		<!-- /.modal-header -->
+        <div class="modal-body"> 
+		<div class="input-container">
+		<!-- ### BEGIN INPUT FIELDS ### -->
+                <div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label for="title">Title</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <span class="value"><%= title %></span>
+                  </div>
+                </div>			
+                <div class="row all-day-row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label for="AllDay">All Day</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <span class="value"><%= isAllDay %></span>
+                  </div>
+                </div>	
+                <div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label for="StartDate">Start Date:</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <span class="value"><%= startDate %> <%= StartTime %></span>
+                  </div>
+                </div>			
+				<div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label for="EndDate">End Date:</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                   <span class="value"><%= endDate %> <%= EndTime %></span>
+                  </div>
+                </div>	
+				<div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label for="location">Location:</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <span class="value"><%= location %></span>
+                  </div>
+                </div>		
+				<div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<label for="description">Description:</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+						<textarea id="description" class="text-area" maxlength="500" readonly="readonly"><%= description %></textarea>                   
+                  </div>
+                </div>											
+									
+
+<!--
+            <div class="row">
+              <label>File:</label>
+              <div class="input-container">
+                <input maxlength="250" id='file' class="input-field" type="file" accept="image/*" value="" />
+              </div>
+            </div>
+-->
+	
+		
+		<!-- ### END INPUT FILEDS ### -->
+		</div>
+		<!-- /.input-container -->
+		</div>
+        <!-- .modal-body -->
+        <div class="modal-footer">
+           <div class="buttons-container"> 
+		   <div class="col-xs-2">
+			<% if(isEditable){ %>
+				<button type="button" class="btn btn-danger delete-model-link">Remove</button>
+			<% } %>
+			</div>
+			<div class="col-xs-10">
+				<button type="button" data-dismiss="modal" class="btn btn-default cancelButton">Cancel</button>
+				<% if(isEditable){ %>
+				<button type="button" class="btn btn-primary editButton edit-model-link">Edit</a>
+				<% } %>
+			</div>
+			</div>
+            <!-- /buttonsContainer -->		
+		  </div> <!-- /.modal-footer -->
+        
+      </form>
+    </div>
+    <!-- /.modal-content --> 
+    
+  </div>
+  <!-- /.modal-dialog --> 
+</div>
+<!-- /.modal --> 
+  </script>
+  <!-- /Display-Event-ModalOverlay-Template -->
+<script type="text/template" id="Delete-Event-ModalOverlay-Template">
+<div id="DeleteEventModal" class="ui-deliverables-modal modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="AddEditEventForm">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal(UILoginForm);"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Remove Event</h4>
+        </div>
+		<!-- /.modal-header -->
+        <div class="modal-body"> 
+			<div class="notify-container">
+			Delete <span class="title"><%= title %></span>?
+			</div>
+			<!-- /notify-container -->
+		</div>
+        <!-- .modal-body -->
+        <div class="modal-footer">
+           <div class="buttons-container">    
+				<button type="button" data-dismiss="modal" class="btn btn-default cancelButton">Cancel</button>
+				<button type="button" class="btn btn-danger do-delete-link deleteButton">Delete</a>
+
+			</div>
+            <!-- /buttonsContainer -->		
+		  </div> <!-- /.modal-footer -->
+        
+      </form>
+    </div>
+    <!-- /.modal-content --> 
+    
+  </div>
+  <!-- /.modal-dialog --> 
+</div>
+<!-- /.modal --> 
+  </script>
+  <!-- /Delete-Event-ModalOverlay-Template -->

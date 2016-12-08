@@ -1,0 +1,16 @@
+@UI_Blue: #062a53;
+@UI_Grey: #ccc;
+@UI_Spacing: 10px;
+@UI_Error: #f00;
+@UI_Success: #090;
+@UI_Media_xs: 340px;
+@UI_Media_sm: 768px;
+@UI_Media_md: 990px;
+@UI_H1: 28px;
+@UI_Nav_TextHoverColor: #fff;
+.clear-fix{ &:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both;  height: 0; } }
+.responsive(@maxWidth; @rules) {
+    @media (max-width: @maxWidth) {
+        @rules();
+    }
+}

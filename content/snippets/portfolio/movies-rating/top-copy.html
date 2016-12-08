@@ -1,0 +1,36 @@
+<p>In an interview, I was given the following problem as a test. I solved it using jQuery, backbone.js, and RateIt star rating plugin.</p>
+<article id="movies-description">
+    <p>For the following problems, please use your best judgment to resolve any ambiguity and note design choices you have made. Please submit work in complete JavaScript/CSS/HTML and feel free to use any frameworks you’re comfortable with </p>
+    <h3>Problem 1 – Movie Rating</h3>
+    <p><strong>Description</strong><br />
+      Company X is building out a new tool that allows users to browse the movies that their company makes. As part of this tool we’d like to allow users to rate the movies so that we can begin to build a recommendation engine. Your job is to build a page that will display a list of movies to a user and allow them to rate the movies.</p>
+    <p><strong> Requirements</strong><br />
+      The page should retrieve a list of movies from a URL. The data will be returned as JSON – please request the data asynchronously as in the future we might wish to add filters to the page to allow the user to filter the list in real time. Your page should display the list of movies with applicable metadata.</p>
+    <p> In addition to the list of available movies, please provide a way to rate each movie. You can choose how to format the message you send to the server with the rating (both URL structure &amp; message structure). The server will provide one of two responses to your rating with a 33% failure rate:</p>
+    <p> { status: “SUCCESS” }<br />
+      { status: “FAILURE”, reason: “sample reason” }</p>
+    <p> Make sure you let the user know whether their rating was successful or not! </p>
+    </p>
+    <h4>API</h4>
+    <table width="100%" border="1">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Endpoint</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GET</td>
+          <td>/hiring/list.php</td>
+          <td>Get a list of movies in the Company X system</td>
+        </tr>
+        <tr>
+          <td>?</td>
+          <td>/hiring/rate.php</td>
+          <td>Rate a movie in the Company X system</td>
+        </tr>
+      </tbody>
+    </table>
+  </article>

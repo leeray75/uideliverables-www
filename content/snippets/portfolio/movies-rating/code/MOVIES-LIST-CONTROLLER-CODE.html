@@ -1,0 +1,68 @@
+MoviesControllers.controller('MoviesListController', ['$scope', 'dataFactory', 'user', function($scope, dataFactory, user) {
+    $scope.pageTitle = "Movies List";
+    $scope.statusCount = 0;
+    $scope.status = {};
+    $scope.movies = null;
+    $scope.moviesSearchFilter = function(movie) {
+        var re = new RegExp($scope.titleFilter, 'i');
+        return !$scope.titleFilter || re.test(movie.title) || re.test(movie.plot);
+    };
+    $scope.deleteMovie = function(movie) {
+            var message = "Delete Movie: " + movie.title + "?";
+            $scope.status = {
+                type: "CONFIRM",
+                message: message,
+                title: "Movie Delete Confirmation",
+                okCallback: function() {
+                        dataFactory.deleteMovie(movie["id"])
+                            .success(function(data) {
+                                var message = movie.title + " Deleted Successfully!";
+                                $scope.status = {
+                                    type: "SUCCESS",
+                                    message: message,
+                                    title: "Movie Deleted",
+                                    okCallback: function() {}
+                                };
+
+                                $scope.statusCount++;
+                                getMovies();
+                            }) // end success
+                            .error(function(error) {
+                                message = error.errorMessage;
+                                $scope.status = {
+                                    type: "ERROR",
+                                    message: message,
+                                    title: "ERROR"
+                                };
+
+                                $scope.statusCount++;
+                            }); // end error
+                    } //end okCallback
+            }; // end status
+
+            $scope.statusCount++;
+
+        } // end scope.deleteMovie
+    function getMovies() {
+        dataFactory.getMovies()
+            .success(function(data) {
+                for (var obj in data) {
+                    var movie = data[obj];
+                    movie = MovieTemplateHelper.getUpdatedModel(movie,user);
+                }
+                $scope.movies = data;
+            })
+            .error(function(error) {
+                var message = 'Unable to load movies data: ' + error.errorMessage;
+                $scope.status = {
+                    type: "ERROR",
+                    message: message,
+                    title: "ERROR"
+                };
+
+                $scope.statusCount++;
+            });
+    }
+    getMovies();
+
+}]);

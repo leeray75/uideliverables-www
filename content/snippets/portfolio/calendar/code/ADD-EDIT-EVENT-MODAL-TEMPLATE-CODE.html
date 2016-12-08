@@ -1,0 +1,117 @@
+&lt;%
+	var showRemoveLink = false;
+	try{
+		showRemoveLink = !(id==null);
+	}catch(e){ showRemoveLink = false; }
+	var startDateArray = start.split(&quot; &quot;);	
+	var startDate = (startDateArray[0].length&gt;0) ? startDateArray[0] : GlobalVariables.CurrentDate.split(&quot; &quot;)[0];				
+	var endDateArray = end.split(&quot; &quot;);
+	var endDate =  (endDateArray[0].length&gt;0) ? endDateArray[0] : GlobalVariables.CurrentDate.split(&quot; &quot;)[0];		
+	var StartTime = (startDateArray[0].length&gt;0) ? startDateArray[1] : &quot;01:00:00&quot;;		
+	var EndTime = (endDateArray[0].length&gt;0) ? endDateArray[1] : &quot;01:00:00&quot;;
+	var location = location || &quot;&quot;;	
+	var dateArray = startDate.split(&quot;-&quot;);
+	var isAllDayCheckedProp = allDay==true ? &quot; checked='checked' &quot; : &quot;&quot;;
+	startDate = dateArray[1]+&quot;/&quot;+dateArray[2]+&quot;/&quot;+dateArray[0];
+	dateArray = endDate.split(&quot;-&quot;);
+	endDate = dateArray[1]+&quot;/&quot;+dateArray[2]+&quot;/&quot;+dateArray[0];
+	
+	StartTime = getFormattedTime(StartTime);
+	EndTime = getFormattedTime(EndTime);
+	title = title.replace(/&quot;/g, '&quot;');
+	location = location.replace(/&quot;/g, '&quot;');
+	description = description.replace(/&quot;/g, '&quot;');
+
+
+%&gt;
+&lt;div id=&quot;AddEditEventModal&quot; class=&quot;ui-deliverables-modal modal&quot;&gt;
+  &lt;div class=&quot;modal-dialog&quot;&gt;
+    &lt;div class=&quot;modal-content&quot;&gt;
+      &lt;form id=&quot;AddEditEventForm&quot;&gt;
+        &lt;div class=&quot;modal-header&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-label=&quot;Close&quot; ng-click=&quot;closeModal(UILoginForm);&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&times;&lt;/span&gt;&lt;/button&gt;
+          &lt;h4 class=&quot;modal-title&quot;&gt;Event Details&lt;/h4&gt;
+        &lt;/div&gt;
+		&lt;!-- /.modal-header --&gt;
+        &lt;div class=&quot;modal-body&quot;&gt; 
+		&lt;div class=&quot;input-container&quot;&gt;
+		&lt;!-- ### BEGIN INPUT FIELDS ### --&gt;
+                &lt;div class=&quot;row&quot;&gt;
+                  &lt;div class=&quot;labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4&quot;&gt;
+                    &lt;label for=&quot;title&quot;&gt;Title&lt;/label&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&quot;input-column col-xs-8 col-sm-8 col-md-8 col-lg-8&quot;&gt;
+                    &lt;input maxlength=&quot;250&quot; id='title' class=&quot;input-field&quot; type=&quot;text&quot; value=&quot;&lt;%= title %&gt;&quot; /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;			
+                &lt;div class=&quot;row all-day-row&quot;&gt;
+                  &lt;div class=&quot;labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4&quot;&gt;
+                    &lt;label for=&quot;AllDay&quot;&gt;All Day&lt;/label&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&quot;input-column col-xs-8 col-sm-8 col-md-8 col-lg-8&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;AllDay&quot; id=&quot;AllDay&quot; value=&quot;1&quot; &lt;%= isAllDayCheckedProp %&gt; /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;	
+                &lt;div class=&quot;row&quot;&gt;
+                  &lt;div class=&quot;labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4&quot;&gt;
+                    &lt;label for=&quot;StartDate&quot;&gt;Start Date:&lt;/label&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&quot;input-column col-xs-8 col-sm-8 col-md-8 col-lg-8&quot;&gt;
+                    &lt;input type=&quot;text&quot; name=&quot;StartDate&quot; id=&quot;StartDate&quot; class=&quot;startDate calendar&quot; readonly='readonly' value=&quot;&lt;%= startDate %&gt; &lt;%= StartTime %&gt;&quot; /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;			
+				&lt;div class=&quot;row&quot;&gt;
+                  &lt;div class=&quot;labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4&quot;&gt;
+
+                    &lt;label for=&quot;EndDate&quot;&gt;End Date:&lt;/label&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&quot;input-column col-xs-8 col-sm-8 col-md-8 col-lg-8&quot;&gt;
+                    &lt;input type=&quot;text&quot; name=&quot;EndDate&quot; id=&quot;EndDate&quot; class=&quot;endDate calendar&quot; readonly='readonly' value=&quot;&lt;%= endDate %&gt; &lt;%= EndTime %&gt;&quot; /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;	
+				&lt;div class=&quot;row&quot;&gt;
+                  &lt;div class=&quot;labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4&quot;&gt;
+                    &lt;label for=&quot;location&quot;&gt;Location:&lt;/label&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&quot;input-column col-xs-8 col-sm-8 col-md-8 col-lg-8&quot;&gt;
+                    &lt;input maxlength=&quot;250&quot; name=&quot;location&quot; id='location' class=&quot;input-field&quot; type=&quot;text&quot; value=&quot;&lt;%= location %&gt;&quot; /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;		
+				&lt;div class=&quot;row&quot;&gt;
+                  &lt;div class=&quot;labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4&quot;&gt;
+						&lt;label for=&quot;description&quot;&gt;Description:&lt;/label&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&quot;input-column col-xs-8 col-sm-8 col-md-8 col-lg-8&quot;&gt;
+						&lt;textarea id=&quot;description&quot; class=&quot;text-area&quot; maxlength=&quot;500&quot;&gt;&lt;%= description %&gt;&lt;/textarea&gt;
+			  			&lt;div class=&quot;counter-line&quot;&gt;(&lt;span id=&quot;description-counter&quot;&gt;&lt;/span&gt; characters remaining)&lt;/div&gt;                    
+                  &lt;/div&gt;
+                &lt;/div&gt;											
+		
+		&lt;!-- ### END INPUT FILEDS ### --&gt;
+		&lt;/div&gt;
+		&lt;!-- /.input-container --&gt;
+		&lt;/div&gt;
+        &lt;!-- .modal-body --&gt;
+        &lt;div class=&quot;modal-footer&quot;&gt;
+           &lt;div class=&quot;buttons-container&quot;&gt; 
+			   &lt;div class=&quot;col-xs-2&quot;&gt;
+				&lt;% if(showRemoveLink){ %&gt;
+					&lt;button type=&quot;button&quot; class=&quot;btn btn-danger delete-model-link&quot;&gt;Remove&lt;/button&gt;
+				&lt;% } %&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;col-xs-10&quot;&gt;		   
+					&lt;button type=&quot;button&quot; data-dismiss=&quot;modal&quot; class=&quot;btn btn-default cancelButton&quot;&gt;Cancel&lt;/button&gt;
+					&lt;button type=&quot;button&quot; class=&quot;btn btn-primary do-save-link saveButton&quot;&gt;Save&lt;/button&gt; 
+				&lt;/div&gt;
+			&lt;/div&gt;
+            &lt;!-- /buttonsContainer --&gt;		
+		  &lt;/div&gt; &lt;!-- /.modal-footer --&gt;
+        
+      &lt;/form&gt;
+    &lt;/div&gt;
+    &lt;!-- /.modal-content --&gt; 
+    
+  &lt;/div&gt;
+  &lt;!-- /.modal-dialog --&gt; 
+&lt;/div&gt;
+&lt;!-- /.modal --&gt; 

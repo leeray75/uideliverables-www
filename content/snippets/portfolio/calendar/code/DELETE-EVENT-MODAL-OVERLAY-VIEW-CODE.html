@@ -1,0 +1,67 @@
+DeleteEventModalOverlayView = Backbone.View.extend({
+    tagName: "div",
+    template: _.template($('#Delete-Event-ModalOverlay-Template').html()),
+    id: '#DeleteEventModal',
+    events: {
+        "click .simplemodal-close": "close"
+    },
+
+    initialize: function() {
+
+    },
+    render: function() {
+        var jsonModel = this.model.toJSON();
+        var thisObj = this;
+        $(AddEditEventModalOverlayView.id).remove();
+        var jsonModel = this.model.toJSON();
+        var template = this.template(jsonModel);
+        $('body').append(template);
+
+        this.initModal();
+        return this;
+    },
+    initModal: function() {
+        var thisObj = this;
+        $(this.id).modal({
+            autoResize: false,
+            fixed: false,
+            overlayId: 'EventModalOverlay',
+            containerId: 'EventModalContainer',
+            onShow: this.show(),
+            onClose: this.close()
+        });
+    },
+    show: function() {
+        var thisObj = this;        
+        $(this.id + ' .do-delete-link').on("click.modal", function() {
+            thisObj.destroy();
+            return false;
+        });        
+    },
+
+    destroy: function() {
+        var thisObj = this;
+        this.model.destroy({
+            success: thisObj.close(),
+            error: function(model, response) {
+                var data = $.parseJSON(response.responseText);
+                if (data.errorMessage != null) {
+                    alert(response.status + " : " + $(data.errorMessage).text());
+                    if (response.status == "401") {
+                        thisObj.close();
+                        location.reload();
+                    }
+                } else {
+                    alert("Unknown Error");
+                }
+            }
+        });
+
+    },
+    close: function() {
+        $(this.id).off("click.modal", ".do-save-link");        
+        $.modal.modal('hide');
+        $(this.id).detach();
+    }
+
+}); // end DeleteEventModalOverlayView

@@ -1,0 +1,61 @@
+<div id="UI-Login-Module" ng-controller="loginController">
+  <div id="LoginModal" class="ui-deliverables-modal login-modal-container modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form name="UILoginForm" id="UILoginForm" novalidate>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal(UILoginForm);"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Login</h4>
+          </div>
+          <div class="modal-body">
+            <div id="LoginSpinner" ng-show="isWaiting"> <img src="/www/content/images/apps/movies/ajax-loader.gif" /> </div>
+            <div id="LoginSuccess" ng-show="isLoginSuccess && !isWaiting"> You Login Successfully! </div>
+            <div id="NotLoginSuccess" ng-show="!isLoginSuccess && !isWaiting">
+              <div class="top-error-message error-msg" ng-show="errorMessage != ''"> {{ errorMessage }} </div>
+              <div class="input-container">
+                <div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label>User Name or Email:</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input type="text" name="username" id="username" ng-model="user.username" required>
+                    <div class="check-input-field-container" ng-show="UILoginForm.$submitted || UILoginForm.username.$touched">
+                      <div class="error-msg" ng-show="UILoginForm.username.$error.required">Enter Your User Name or Email.</div>
+                    </div>
+                    <!-- /check-input-field-container --> 
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="labels-column col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label>Password:</label>
+                  </div>
+                  <div class="input-column col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input type="password" name="password" id="password" ng-model="user.password" required>
+                    <div class="check-input-field-container" ng-show="UILoginForm.$submitted || UILoginForm.password.$touched">
+                      <div class="error-msg" ng-show="UILoginForm.password.$error.required">Enter Your Password.</div>
+                    </div>
+                    <!-- /check-input-field-container --> 
+                  </div>
+                </div>
+              </div>
+              <!-- /input-container --> 
+            </div>
+            <!-- /NotLoginSuccess --> 
+          </div>
+          <!-- .modal-body -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeModal(UILoginForm);">Close</button>
+            <span ng-show="!isLoginSuccess">
+            <button type="button" class="btn btn-primary" ng-click="login(UILoginForm)">Login</button>
+            </span> </div>
+            <input type="submit" name="submit" value="" ng-click="login(UILoginForm)" style="display: none;" />
+        </form>
+      </div>
+      <!-- /.modal-content --> 
+      
+    </div>
+    <!-- /.modal-dialog --> 
+  </div>
+  <!-- /.modal --> 
+  
+</div>

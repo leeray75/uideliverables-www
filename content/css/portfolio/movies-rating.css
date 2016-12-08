@@ -1,0 +1,79 @@
+@charset "utf-8";
+/* CSS Document */
+
+#MoviesListView{
+	width: 100%;
+	margin: 20px auto 20px auto;
+	padding: 20px 0 20px 0;
+	border: 1px solid #03C;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+#MoviesListView ul#movies-list
+{ 
+	width: 100%;
+	list-style: outside none none;
+}
+#MoviesListView ul#movies-list > li
+{ margin-bottom: 20px; padding-top: 20px;  border-top: 1px solid #999; }
+#MoviesListView ul#movies-list > li .movie-list-item-container
+{ width: 90%; margin: 0 auto 0 auto; }
+#MoviesListView ul#movies-list > li:first-child{ border-top: none; }
+/*
+#MoviesListView ul#movies-list > li .poster-image{ width: 140px; float: left; margin-left: 10px; }
+#MoviesListView ul#movies-list > li .poster-image img{ width: 140px;}
+#MoviesListView ul#movies-list > li .meta-data{ width: 760px; float: right;  }
+#MoviesListView ul#movies-list > li .meta-data .info-rows{ position: relative; }
+#MoviesListView ul#movies-list > li .meta-data .row{ margin-bottom: 5px;}
+#MoviesListView ul#movies-list > li .meta-data .movie-title{ font-size: 16px; font-weight: bold; }
+#MoviesListView ul#movies-list > li .meta-data .movie-label{ font-weight: bold;}
+#MoviesListView ul#movies-list > li .meta-data .info-rows > .row{ width: 460px;}
+#MoviesListView .ratings-container{ position: absolute; top: 0px; right: 20px;}
+*/
+
+#MoviesListView .movie-title{ font-size: 1.5em; font-weight: bold; }
+#MoviesListView .movie-label{ font-weight: bold;}
+#MoviesListView .ratings-container .row{ text-align:right;}
+#MoviesListView .ratings-container .row.imdb-votes{ text-align: right;}
+#MoviesListView .ratings-container .votes-count{ font-size: 10px; }
+
+#MoviesListView .plot{
+	line-height: 1.5em;
+	padding: 10px 20px 10px 20px;
+	margin-top: 20px;
+	border-top: 1px solid #CCC;	
+	border-bottom: 1px solid #CCC;	
+	
+}
+#MoviesListView .additional-info-rows{ margin-top: 20px;}
+
+/* RateiIt plugin style */
+
+.rateit-range{ height: 16px; overflow: hidden;}
+button.rateit-reset{ display: none !important;}
+
+#MoviesListView ul{
+    border: 0 none;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;	
+}
+
+#MoviesListView .clear-fix:after{
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+@media (max-width: 767px) {
+#MoviesListView .ratings-container .row{ text-align:left}
+#MoviesListView .ratings-container .row.imdb-votes{ text-align: left;}
+}
+ @media screen and (max-width: 360px) {
+#MoviesListView .ratings-container .row{ text-align:left}
+#MoviesListView .ratings-container .row.imdb-votes{ text-align: left;}
+
+}

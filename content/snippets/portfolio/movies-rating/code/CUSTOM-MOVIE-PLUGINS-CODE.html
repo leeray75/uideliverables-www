@@ -1,0 +1,326 @@
+var MoviesPlugins = {
+        RateItObj: {},
+        setNumericField: function(scope, elem, attrs) {
+            $(elem).keydown(function(e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: Ctrl+C
+                    (e.keyCode == 67 && e.ctrlKey === true) ||
+                    // Allow: Ctrl+Z
+                    (e.keyCode == 90 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right, down, up
+                    (e.keyCode &gt;= 35 && e.keyCode &lt;= 40)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode &lt; 48 || e.keyCode &gt; 57)) && (e.keyCode &lt; 96 || e.keyCode &gt; 105)) {
+                    e.preventDefault();
+                }
+            });
+        },
+        setMaskedYear: function(scope, elem, attrs) {
+            $(elem).mask(&quot;9999&quot;);
+
+        },
+        setMaskedDate: function(scope, elem, attrs) {
+            $(elem).mask(&quot;99-99-9999&quot;);
+            $(elem).on('blur', function() {
+                var released = $(this).val();
+                var dateArray = released.split(&quot;-&quot;);
+                if (dateArray[0].length &lt; 4) {
+                    released = dateArray[2] + &quot;-&quot; + dateArray[0] + &quot;-&quot; + dateArray[1];
+                }
+                scope.movie[&quot;released&quot;] = released;
+            });
+        }, // end MoviesPlugins.setMaskedDate
+        setReadOnlyRateIt: function(scope, elem, attrs) {
+            var imdbRating = 0;
+            if ((typeof scope.movie != &quot;undefined&quot;) && scope.movie[&quot;imdbVotes&quot;] != &quot;0&quot;) {
+                imdbRating = MovieTemplateHelper.getImdbRating(scope.movie.imdbRating, scope.movie.imdbVotes) / 2;;
+            }
+            var rateIt;
+            var id = attrs[&quot;id&quot;];
+            var selector = '#' + id;
+            if (this.RateItObj.hasOwnProperty(id)) {
+                $(selector).find('span.rateit-range').attr('aria-valuenow', imdbRating);
+                this.RateItObj[id].rateit(&quot;value&quot;, imdbRating);
+            } else {
+                var selector = '#' + id;
+                this.RateItObj[id] = $(selector).rateit({
+                    &quot;readonly&quot;: true,
+                    &quot;value&quot;: imdbRating,
+                    &quot;max&quot;: 5
+                });
+                if (id == &quot;RateIt-User-Preview&quot;) {
+                    this.RateItObj[id].rateit(&quot;value&quot;, 0);
+                } else {
+                    this.RateItObj[id].rateit(&quot;value&quot;, imdbRating);
+                }
+            }
+
+        }, //end MoviePlugins.setReadOnlyRateIt
+        setUsersRateIt: function(scope, elem, attrs, dataFactory) {
+            var previousVal = parseInt(attrs.rating) / 2;
+            var rateitObj = $(elem).rateit({
+                &quot;beforeSelection&quot;: function(prevVal) {
+                    previousVal = prevVal;
+                },
+                &quot;afterSelection&quot;: function(val) {
+                        var thisObj = this;
+                        var movie = angular.copy(scope.movie);
+                        var moviesKey = &quot;MovieVotes-&quot; + user.get(&quot;id&quot;);
+                        var votes = (typeof localStorage.getItem(moviesKey) == 'undefined' || localStorage.getItem(moviesKey) == null) ? {} : angular.fromJson(localStorage.getItem(moviesKey));
+                        if (!votes.hasOwnProperty(&quot;movie_&quot; + movie[&quot;id&quot;]) || user.get(&quot;isAdmin&quot;) == &quot;1&quot;) {
+                            var movieID = movie['id'];
+                            var title = movie['title'];
+                            var rating = val * 2;
+                            movie['imdbRating'] = (parseInt(movie['imdbRating']) + rating).toString();
+                            movie['imdbVotes'] = (parseInt(movie['imdbVotes']) + 1).toString();
+                            var vote = {
+                                movie_id: 0,
+                                ratings: 0,
+                                votes: 0
+                            }
+                            vote[&quot;movie_id&quot;] = movie[&quot;id&quot;];
+                            vote[&quot;ratings&quot;] = movie[&quot;imdbRating&quot;];
+                            vote[&quot;votes&quot;] = movie[&quot;imdbVotes&quot;];
+                            dataFactory.submitVote(vote)
+                                .success(function(data) {
+                                    dataFactory.getMovie(data[&quot;movie_id&quot;]).success(function(data) {
+                                        var movie = MovieTemplateHelper.getUpdatedModel(data);
+                                        votes[&quot;movie_&quot; + movie[&quot;id&quot;]] = rating;
+                                        localStorage.setItem(moviesKey, angular.toJson(votes));
+                                        angular.copy(movie, scope.movie);
+                                        thisObj.readonly = true;
+                                        var message = &quot;Your vote for \&quot;&quot; + movie[&quot;title&quot;] + &quot;\&quot; is successful!&quot;;
+                                        $(elem).parent().find('.message').remove();
+                                        $(elem).parent().prepend('&lt;div class=&quot;message&quot; style=&quot;color:#f00;&quot;&gt;' + message + '&lt;/div&gt;');
+                                    });
+
+
+                                })
+                                .error(function(error) {
+                                    message = 'Unable to submit vote: ' + error.errorMessage;
+                                    $(elem).parent().find('.message').remove();
+                                    $(elem).parent().prepend('&lt;div class=&quot;message&quot; style=&quot;color:#f00;&quot;&gt;' + message + '&lt;/div&gt;');
+                                });
+                        } else {
+                            var message = &quot;You have already voted for this movie!&quot;;
+                            $(elem).parent().find('.message').remove();
+                            $(elem).parent().prepend('&lt;div class=&quot;message&quot; style=&quot;color:#f00;&quot;&gt;' + message + '&lt;/div&gt;');
+                        }
+                    } // end afterSelection
+            }); // end rateitObj		
+        }, // end MoviesPlugins.setUsersRateIt
+        setEditables: function(scope, elem, attrs) {
+            var textSettings = {
+                cssclass: 'editable-item',
+                type: 'text',
+                submit: 'OK',
+                cancel: 'CANCEL'
+            };
+            $('.editable-text').editable(function(value, settings) {
+                var key = $(this).attr('model-key');
+                if ($.trim(value) != &quot;&quot;) {
+                    scope.movie[key] = value;
+                    if (scope.movie[&quot;id&quot;] == 0) {
+                        //MovieTemplateHelper.setLocalCopy(scope.movie);
+                        $('#AddEditForm').submit();
+                        scope.theForm[key].$setViewValue(value);
+                    } else {
+                        scope.updateMovie();
+                    }
+                    return (value);
+                } else {
+                    return (scope.movie[key]);
+                }
+            }, textSettings); // end .editable-text
+            var dateSettings = {
+                cssclass: 'editable-item',
+                type: &quot;masked&quot;,
+                mask: &quot;99-99-9999&quot;,
+                submit: 'OK',
+                cancel: 'CANCEL'
+            };
+            $('.editable-date').editable(function(value, settings) {
+                var key = $(this).attr('model-key');
+                if ($.trim(value) != &quot;&quot;) {
+                    var released = value;
+                    var dateArray = released.split(&quot;-&quot;);
+                    if (dateArray[0].length &lt; 4) {
+                        released = dateArray[2] + &quot;-&quot; + dateArray[0] + &quot;-&quot; + dateArray[1];
+                    }
+                    scope.movie[key] = released;
+                    if (scope.movie[&quot;id&quot;] == 0) {
+                        //MovieTemplateHelper.setLocalCopy(scope.movie);
+                        scope.theForm[key].$setViewValue(released);
+                    } else {
+                        scope.updateMovie();
+                    }
+                    scope.$apply();
+                    return (value);
+                } else {
+                    return (scope.previewMovieItem[&quot;DisplayReleaseDate&quot;]);
+                }
+            }, dateSettings); // end .editable-date
+
+            var ratingSettings = {
+                data: &quot; {'G':'G','PG':'PG','PG-13':'PG-13', 'R':'R'}&quot;,
+                type: 'select',
+                submit: 'OK',
+                cancel: 'CANCEL'
+            }
+            $('#Editable-Select-Rated').editable(function(value, settings) {
+                var key = $(this).attr('model-key');
+                if ($.trim(value) != &quot;&quot;) {
+                    scope.movie[key] = value;
+                    if (scope.movie[&quot;id&quot;] == 0) {
+                        //MovieTemplateHelper.setLocalCopy(scope.movie);
+                        scope.theForm[key].$setViewValue(value);
+                    } else {
+                        scope.updateMovie();
+                    }
+                    return (value);
+                } else {
+                    return (scope.movie[key]);
+                }
+            }, ratingSettings); // end .editable-rated	
+
+            var textareaSettings = {
+                cssclass: 'editable-item',
+                type: 'textarea',
+                submit: 'OK',
+                cancel: 'CANCEL'
+            }
+            $('.editable-textarea').editable(function(value, settings) {
+                var key = $(this).attr('model-key');
+                if ($.trim(value) != &quot;&quot;) {
+                    scope.movie[key] = value;
+                    if (scope.movie[&quot;id&quot;] == 0) {
+                        //MovieTemplateHelper.setLocalCopy(scope.movie);
+                        scope.theForm[key].$setViewValue(value);
+                    } else {
+                        scope.updateMovie();
+                    }
+                    return (value);
+                } else {
+                    return (scope.movie[key]);
+                }
+            }, textareaSettings); // end .editable						 
+
+        }, // end MoviesPlugins.setEditables
+        setDialog: function(scope, elem, attrs) {
+            var status = scope.status;
+            var okButton = {
+                text: &quot;OK&quot;,
+                click: function() {
+                    $(this).dialog(&quot;close&quot;);
+                    try {
+                        status.okCallback();
+                    } catch (e) {
+                        //console.log(&quot;OK Callback error: &quot;+e);	
+                    }
+                }
+            };
+            var settings = {}
+            if (status[&quot;type&quot;] == &quot;CONFIRM&quot;) {
+                settings = {
+                        draggable: false,
+                        title: status[&quot;title&quot;],
+                        dialogClass: &quot;confirm-dialog&quot;,
+                        buttons: [
+                            okButton, {
+                                text: &quot;CANCEL&quot;,
+                                click: function() {
+                                    $(this).dialog(&quot;close&quot;);
+                                }
+                            }
+                        ]
+                    } // end settings;			
+            } else {
+                var dClass = status[&quot;type&quot;] == &quot;SUCCESS&quot; ? &quot;success-dialog&quot; : &quot;error-dialog&quot;;
+                settings = {
+                        draggable: false,
+                        title: status[&quot;title&quot;],
+                        dialogClass: dClass,
+                        buttons: [okButton]
+                    } // end settings
+            }
+            $('#Movies-Dialog').attr(&quot;title&quot;, status[&quot;title&quot;]);
+            $('#Movies-Dialog .status-message').html(status[&quot;message&quot;]);
+            $(&quot;#Movies-Dialog&quot;).dialog(settings);
+            scope.status = angular.copy({});
+        }, // end setDialog
+        setPosterUpload: function(scope, elem, attrs) {
+                var selector = '#' + attrs[&quot;id&quot;];
+                $(selector).on(
+                    'dragover',
+                    function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                )
+                $(selector).on(
+                    'dragenter',
+                    function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                )
+                $(selector).on('drop', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    var files = event.originalEvent.dataTransfer.files;
+                    var file = files[0];
+                    var fileType = file[&quot;type&quot;];
+                    var ValidImageTypes = [&quot;image/gif&quot;, &quot;image/jpeg&quot;, &quot;image/png&quot;];
+                    if ($.inArray(fileType, ValidImageTypes) &lt; 0) {
+                        var status = {
+                            type: &quot;ERROR&quot;,
+                            title: &quot;Upload Error&quot;,
+                            message: &quot;Invalid Image Type! &quot; + fileType
+                        }
+                        scope.status = angular.copy(status);
+                        MoviesPlugins.setDialog(scope, elem, attrs);
+                    } else {
+                        var api = '/api/movies/poster-upload.php?mid=' + scope.movie[&quot;id&quot;];
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', api, true);
+                        xhr.onload = function() {
+                            var data = angular.fromJson(xhr.responseText);
+                            if (data[&quot;status&quot;] == 1) {
+                                scope.movie[&quot;poster&quot;] = data[&quot;image-src&quot;];
+                                if (scope.movie[&quot;id&quot;] != &quot;0&quot;) {
+                                    scope.updateMovie();
+                                } else {
+                                    scope.reloadView();
+                                }
+                            } else {
+                                scope.status = {
+                                    type: &quot;ERROR&quot;,
+                                    title: &quot;Upload Error&quot;,
+                                    message: &quot;File Upload Error: &quot; + data[&quot;message&quot;]
+
+                                }
+                                scope.statusCount++;;
+                                scope.$apply();
+                                //MoviesPlugins.setDialog(scope, elem, attrs);
+                            }
+                        }; //end xhr.onload	
+                        xhr.upload.onprogress = function(event) {
+                            if (event.lengthComputable) {
+                                var complete = (event.loaded / event.total * 100 | 0);
+                            }
+                        }; // end xhr.upload.onprogress
+
+                        var formData = new FormData();
+                        formData.append('file', file);
+                        xhr.send(formData);
+                    } // end if else Valid image check
+                }); // end $(selector).on('drop'
+
+            } // setPosterUpload
+    } //end MoviesPlugins

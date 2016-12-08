@@ -1,0 +1,57 @@
+DROP TABLE if exists movies_votes;
+DROP TABLE if exists movies;
+CREATE TABLE `movies` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `plot` varchar(500) default NULL,
+  `genre` varchar(100) NOT NULL,
+  `director` varchar(100) NOT NULL,
+  `writers` varchar(100) NOT NULL,
+  `actors` varchar(250) NOT NULL,
+  `poster` varchar(200) NOT NULL,
+  `rated` varchar(5) NOT NULL,
+  `released` date NOT NULL,
+  `year` smallint(4) NOT NULL,
+  `runtime` smallint(3) NOT NULL,
+  `type` varchar(30) NOT NULL default 'movie',
+  `imdbID` varchar(30) NOT NULL,
+  `imdbRating` int(11) NOT NULL default '0',
+  `imdbVotes` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE movies_votes(
+    id INT NOT NULL AUTO_INCREMENT,
+    movie_id bigint( 20 ) NOT NULL UNIQUE,
+	ratings int(11) NOT NULL default 0,
+	votes int(11) NOT NULL default 0,
+    PRIMARY KEY ( id ), 
+	CONSTRAINT FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `movies` VALUES(1, 1, 'Star Wars: Episode IV - A New Hope', 'Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a wookiee and two droids to save the universe from the Empire''s world-destroying battle-station, while also attempting to rescue Princess Leia from the evil Darth Vader.', 'Action, Adventure, Fantasy, Sci-Fi', 'George Lucas', 'George Lucas', 'Mark Hamill, Harrison Ford, Carrie Fisher, Alec Guinness', '/mediamorph/images/imdb/M/MV5BMTU4NTczODkwM15BMl5BanBnXkFtZTcwMzEyMTIyMw@@._V1_SX300.jpg', 'PG', '1977-05-25', 1977, 121, 'movie', 'tt0076759', 6210582, 713860);
+INSERT INTO `movies` VALUES(2, 1, 'Star Wars: Episode I - The Phantom Menace', 'Two Jedi Knights escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to reclaim their old glory.', 'Action, Adventure, Fantasy, Sci-Fi', 'George Lucas', 'George Lucas', 'Ewan McGregor, Liam Neeson, Natalie Portman, Jake Lloyd', 'http://ia.media-imdb.com/images/M/MV5BMTQ4NjEwNDA2Nl5BMl5BanBnXkFtZTcwNDUyNDQzNw@@._V1_SX300.jpg', 'PG', '1999-05-19', 1999, 136, 'movie', 'tt0120915', 0, 0);
+INSERT INTO `movies` VALUES(3, 1, 'Star Wars: Episode III - Revenge of the Sith', 'After three years of fighting in the Clone Wars, Anakin Skywalker falls prey to the Sith Lord''s lies and makes an enemy of the Jedi and those he loves, concluding his journey to the Dark Side.', 'Action, Adventure, Fantasy, Sci-Fi', 'George Lucas', 'George Lucas', 'Hayden Christensen, Natalie Portman, Ewan McGregor, Samuel L. Jackson', 'http://ia.media-imdb.com/images/M/MV5BNTc4MTc3NTQ5OF5BMl5BanBnXkFtZTcwOTg0NjI4NA@@._V1_SX300.jpg', 'PG-13', '2005-05-19', 2005, 140, 'movie', 'tt0121766', 0, 0);
+INSERT INTO `movies` VALUES(4, 1, 'Star Wars: Episode II - Attack of the Clones', 'Ten years after initially meeting, Anakin Skywalker shares a forbidden romance with PadmÃ©while Obi-Wan investigates an assassination attempt on the Senator and discovers a secret clone army crafted for the Jedi.', 'Action, Adventure, Fantasy, Sci-Fi', 'George Lucas', 'George Lucas', 'Hayden Christensen, Natalie Portman, Ewan McGregor, Christopher Lee', 'http://ia.media-imdb.com/images/M/MV5BMTY5MjI5NTIwNl5BMl5BanBnXkFtZTYwMTM1Njg2._V1_SX300.jpg', 'PG', '2002-05-16', 2002, 120, 'movie', 'tt0121765', 0, 0);
+INSERT INTO `movies` VALUES(5, 1, 'Star Wars: Episode V - The Empire Strikes Back', 'After the rebels have been brutally overpowered by the Empire on their newly established base, Luke Skywalker takes advanced Jedi training with Master Yoda, while his friends are pursued by Darth Vader as part of his plan to capture Luke.', 'Action, Adventure, Sci-Fi', 'Irvin Kershner', 'Leigh Brackett, Lawrence Kasdan', 'Mark Hamill, Harrison Ford, Carrie Fisher, Billy Dee Williams', 'http://ia.media-imdb.com/images/M/MV5BMjE2MzQwMTgxN15BMl5BanBnXkFtZTcwMDQzNjk2OQ@@._V1_SX300.jpg', 'PG', '1980-05-21', 1980, 127, 'movie', 'tt0080684', 0, 0);
+INSERT INTO `movies` VALUES(6, 1, 'Star Wars: Episode VI - Return of the Jedi', 'After rescuing Han Solo from the palace of Jabba the Hutt, the Rebels attempt to destroy the Second Death Star, while Luke Skywalker tries to bring his father back to the Light Side of the Force.', 'Action, Adventure, Fantasy, Sci-Fi', 'Richard Marquand', 'Lawrence Kasdan, George Lucas', 'Mark Hamill, Harrison Ford, Carrie Fisher, Billy Dee Williams', '/mediamorph/images/imdb/M/MV5BMjE5MTM3ODU5MV5BMl5BanBnXkFtZTcwOTYzNjk2OQ@@._V1_SX300.jpg', 'PG', '1983-05-25', 1983, 134, 'movie', 'tt0086190', 0, 0);
+INSERT INTO `movies` VALUES(8, 1, 'The Lord of the Rings: The Fellowship of the Ring', 'A meek hobbit of the Shire and eight companions set out on a journey to Mount Doom to destroy the One Ring and the dark lord Sauron.', 'Adventure, Fantasy', 'Peter Jackson', 'J.R.R. Tolkien, Fran Walsh, Philippa Boyens, Peter Jackson', 'Elijah Wood, Ian McKellen, Orlando Bloom', '//upload.wikimedia.org/wikipedia/en/0/0c/The_Fellowship_Of_The_Ring.jpg', 'PG-13', '2001-12-19', 2001, 178, 'movie', 'tt0120737', 43752, 4979);
+INSERT INTO `movies` VALUES(22, 1, 'The Lord of the Rings: The Two Towers', 'While Frodo and Sam edge closer to Mordor with the help of the shifty Gollum, the divided fellowship makes a stand against Sauron''s new ally, Saruman, and his hordes of Isengard.', 'Adventure, Fantasy', 'Peter Jackson', 'J.R.R. Tolkien, Fran Walsh, Philippa Boyens, Stephen Sinclair, Peter Jackson', 'Elijah Wood, Ian McKellen, Viggo Mortensen ', '//upload.wikimedia.org/wikipedia/en/a/ad/Lord_of_the_Rings_-_The_Two_Towers.jpg', 'PG-13', '2002-12-18', 2002, 179, 'movie', 'tt0167261', 7824731, 889174);
+INSERT INTO `movies` VALUES(12, 0, 'ABCDE', 'This is something about the movie. It''s about nothing! I hope this review helps! Good-Bye and so long!', 'Action, Adventure', 'Raymond Lee', 'Raymond Lee', 'Raymond Lee', '//www.uideliverables.com/www/content/images/movie-posters/12/XXJqDUwcawMyZnPiZVML.jpeg', 'PG', '2015-01-01', 2014, 101, 'movie', 't11111', 136, 22);
+INSERT INTO `movies` VALUES(21, 1, 'The Lord of the Rings: The Return of the King', 'Gandalf and Aragorn lead the World of Men against Sauron''s army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.', 'Adventure, Fantasy', 'Peter Jackson', 'J.R.R. Tolkien, Fran Walsh, Philippa Boyens, Peter Jackson', 'Elijah Wood, Viggo Mortensen, Ian McKellen', 'http://upload.wikimedia.org/wikipedia/en/9/9d/Lord_of_the_Rings_-_The_Return_of_the_King.jpg', 'PG-13', '2003-12-17', 2003, 201, 'movie', 'tt0167260', 8788563, 987479);
+INSERT INTO `movies` VALUES(75, 3, 'A Demo Movie', 'A demo movie.  Watch!', 'Fiction', 'Demo Demo', 'Mr. Demo', 'Demo', '/www/content/images/movie-posters/default.gif', 'PG-13', '2015-02-01', 0, 10, '{"id":null,"movie_id":null,"ra', '12345', 80, 9);
+INSERT INTO `movies` VALUES(81, 1, 'test', 'sdfsdfa', 'fds', 'dsffdsa', 'dfsafsda', 'dsafsad', '/www/content/images/movie-posters/default.gif', 'PG', '2011-01-01', 0, 1, 'movie', '', 0, 0);
+
+insert into movies_votes(movie_id, ratings, votes)
+select movies.id, movies.imdbRating, movies.imdbVotes
+from movies;
+
+CREATE OR REPLACE VIEW MoviesView AS 
+select movies.id,  movies.user_id, movies.title, movies.plot, movies.genre, movies.director, movies.writers, 
+movies.actors, movies.poster, movies.rated, movies.released, movies.year, movies.type,
+movies.runtime, movies.imdbID, 
+movies_votes.ratings as imdbRating, movies_votes.votes as imdbVotes, movies_votes.id as votes_id
+from movies, movies_votes 
+where movies.id = movies_votes.movie_id;

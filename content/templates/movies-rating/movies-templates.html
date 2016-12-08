@@ -1,0 +1,61 @@
+<script type="text/template" id="Movie-List-Item-Template">
+<%
+	var DisplayReleaseDate = MovieTemplateHelper.getReleaseDateDisplay(Released);
+	var GenreLabel = MovieTemplateHelper.getGenreLabel(Genre);
+	var DirectorLabel = MovieTemplateHelper.getDirectorsLabel(Director);	
+	var WriterLabel = MovieTemplateHelper.getWritersLabel(Writer);
+	var ActorsLabel = MovieTemplateHelper.getActorsLabel(Actors);
+	var RuntimeMinutes = MovieTemplateHelper.getRuntimeMinutes(Runtime);
+	var PosterImageSrc = MovieTemplateHelper.getPosterImageSrc(Poster);
+%>
+
+<div id="#MovieItem-<%= imdbID %>" class="movie-list-item-container clear-fix row">
+	<div class="row">
+		<div class="image-col col-lg-3 col-md-3 col-sm-3">
+			<img name="PosterImage-<%= imdbID %>" src="<%= PosterImageSrc %>" class="img-responsive"/>
+		</div>
+		<div class="data-col col-lg-9 col-md-9 col-sm-9">
+			<div class="movie-title row">
+				<%= Title %>
+			</div>
+			<div class="row ">
+				<div class="col-lg-6 col-md-6 col-sm-6 info-column">
+						<div class="row"><span class="movie-label">Rated:</span> <span class="rated"><%= Rated %></span></div>		
+						<div class="row"><span class="movie-label">Run Time:</span> <span class="run-time"><%= RuntimeMinutes %> minutes</span></div>
+						<div class="row"><span class="movie-label"><%= GenreLabel %>:</span> <span class="genre"><%= Genre %></span></div>
+						<div class="row"><span class="movie-label">Release Date: </span> <span class="release-date"><%= DisplayReleaseDate %></span></div>
+
+				</div><!-- /info-column -->
+				<div class="ratings-column col-lg6 col-md-6 col-sm-6">
+					<div class="ratings-container">
+						<div class="row"><span class="movie-label">Your Rating:</span> <span id="RateIt-<%= imdbID %>" class="rateit bigstars" data-rateit-starwidth="32" data-rateit-starheight="16"></span>
+						</div>
+						<div class="row">
+							<span class="movie-label">IMDb Rating:</span> <span id="IMDb-RateIt-<%= imdbID %>" class="rateit bigstars" data-rateit-starwidth="32" data-rateit-starheight="16"></span>
+						</div>			
+						<div class="imdb-votes row"> <span class="votes-count">( Rating: <%= imdbRating  %> from <%= imdbVotes %> users)</span></div>
+						</div> <!-- /ratings-container -->
+				</div>
+				<!-- /ratings-column -->
+			</div><!-- /row -->
+			<div class="plot row">
+				<%= Plot %>
+			</div>
+			<!-- /plot -->
+			<div class="additional-info-rows">
+				<div class="row"><span class="movie-label"><%= DirectorLabel %>:</span> <span class="directors"><%= Director %></span></div>
+				<div class="row"><span class="movie-label"><%= WriterLabel %>:</span> <span class="writers"><%= Writer %></span></div>
+				<div class="row"><span class="movie-label"><%= ActorsLabel %>:</span> <span class="actors"><%= Actors %></span></div>						
+			</div>
+		</div>
+		<!-- /data-col -->
+		
+	</div>
+</div>
+
+</script>
+<script type="text/template" id="Rating-Dialog-Template">
+<div id="rating-dialog" title="<%= status %>">
+	<p><%= message %></p>
+</div>
+</script>

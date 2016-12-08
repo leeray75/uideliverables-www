@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+h2{ font-size: 24px; }
+.box {
+	border: 1px solid #CCCCCC;
+	background: #062A53;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	color: #fff;
+	/* height: 190px; */
+	width: 100%;
+	padding: 0 1em 0 1em;
+}
+ul.bxSlider, ul.bxSlider > li {
+	margin: 0px !important;
+}
+#Hero-Slider-Container{
+	/*visibility: hidden;	*/
+}
+
+
+#Welcome-Hero{
+	background: #fff;
+	padding: 20px;
+	margin: 0 0 10px 0;
+	border-radius: 6px;
+	border: 1px solid #03C;
+}
+#Welcome-Hero .hero-image-col img{ float: right;  }
+#Welcome-Hero h1{
+	font-size: 28px;	
+}
+#Welcome-Hero p {
+	
+	font-size: 16px;
+}
+#Events-Calendar-Button {
+	position: absolute;
+	bottom: 20px;
+	left: 50px;
+	z-index: 10;
+}
+#RSS-FEED,
+#Site-Info{ margin-top: 20px; }
+
+
+.btn-info {
+    background-color: #CCC;
+    border-color: #3F2B22;
+    color: #062a53;
+}
+
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active,
+.btn-info.active,
+.open .dropdown-toggle.btn-info {
+  background-color: #eee;
+  border-color: #333;
+  color: #062a53;
+}

@@ -1,0 +1,41 @@
+<ul id="movies-list">
+  <li  ng-repeat="item in movies">
+    <div id="#MovieItem-{{item.imdbID}}" class="movie-list-item-container clear-fix row">
+      <div class="row">
+        <div class="image-col col-lg-3 col-md-3 col-sm-3"> <img name="PosterImage-{{item.imdbID}}" src="{{item.Poster}}" class="img-responsive"/> </div>
+        <div class="data-col col-lg-9 col-md-9 col-sm-9">
+          <div class="movie-title row"> {{item.Title}} </div>
+          <div class="row ">
+            <div class="col-lg-6 col-md-6 col-sm-6 info-column">
+              <div class="row"><span class="movie-label">Rated:</span> <span class="rated">{{item.Rated}}</span></div>
+              <div class="row"><span class="movie-label">Run Time:</span> <span class="run-time">{{item.RuntimeMinutes}} minutes</span></div>
+              <div class="row"><span class="movie-label">{{item.GenreLabel}}:</span> <span class="genre">{{item.Genre}}</span></div>
+              <div class="row"><span class="movie-label">Release Date: </span> <span class="release-date">{{item.DisplayReleaseDate}}</span></div>
+            </div>
+            <!-- /info-column -->
+            <div class="ratings-column col-lg6 col-md-6 col-sm-6">
+              <div class="ratings-container">
+                <div class="row"><span class="movie-label">Your Rating:</span> <span id="RateIt-{{item.imdbID}}" class="rateit bigstars" data-rateit-starwidth="32" data-rateit-starheight="16" rating="0" imdbID="{{item.imdbID}}" rateTitle="{{item.Title}}" imdb-user-rate></span> </div>
+                <div class="row"> <span class="movie-label">IMDb Rating:</span> <span id="IMDb-RateIt-{{item.imdbID}}" class="rateit bigstars" data-rateit-starwidth="32" data-rateit-starheight="16" rating="{{item.imdbRating}}" imdb-rate></span> </div>
+                <div class="imdb-votes row"> <span class="votes-count">( Rating: {{item.imdbRating}} from {{item.imdbVotes}} users)</span></div>
+              </div>
+              <!-- /ratings-container --> 
+            </div>
+            <!-- /ratings-column --> 
+          </div>
+          <!-- /row -->
+          <div class="plot row"> {{item.Plot}} </div>
+          <!-- /plot -->
+          <div class="additional-info-rows">
+            <div class="row"><span class="movie-label">{{item.DirectorLabel}}:</span> <span class="directors">{{item.Director}}</span></div>
+            <div class="row"><span class="movie-label">{{item.WriterLabel}}:</span> <span class="writers">{{item.Writer}}</span></div>
+            <div class="row"><span class="movie-label">{{item.ActorsLabel}}:</span> <span class="actors">{{item.Actors}}</span></div>
+          </div>
+        </div>
+        <!-- /data-col --> 
+        
+      </div>
+    </div>
+  </li>
+</ul>
+<!-- /movies-list --> 

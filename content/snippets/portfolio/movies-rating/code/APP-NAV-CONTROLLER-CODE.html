@@ -1,0 +1,7 @@
+MoviesControllers.controller('asideMenuController', function ($scope,   $location) {
+      $scope.$on('$routeChangeSuccess', function() {
+		  var array = $location.path().split("/");
+		  var loc = array[array.length-1]=="0" ? "add" : array[1];
+          $scope.menuActive = loc;
+      });
+  })

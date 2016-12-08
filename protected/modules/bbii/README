@@ -1,0 +1,84 @@
+﻿BBii 0.4
+==========
+
+Copyright (c) 2013, BBii - Ronald van Belzen. All rights reserved.  
+ - See accompanying LICENSE for license information.
+
+BBii is an extension to the Yii Framework (http://www.yiiframework.com/license/) 
+in the form of a module. BBii adds and integrates a lightweight webforum (or 
+bulletin board) to an existing Yii application.
+
+
+##Requirements
+
+Yii 1.1.8 or above.
+The application to which BBii is added needs to have a user table.
+
+
+##Usage
+
+* Extract the zip file to the application's protected/modules directory
+* Create database tables according to bbii/data/schema.mysql.sql
+* Import sample data from bbii/data/sampledata.mysql.sql
+* Create the subdirectory 'avatar’ in your application webroot directory to which 
+  the application must be given read/write access rights.
+* Edit your configuration to register the module (the default option values may 
+  need to be adjusted):
+~~~
+[php]
+'modules'=>array(
+	'forum'=>array(
+		'class'=>'application.modules.bbii.BbiiModule',
+		'adminId'=>1,
+		'userClass'=>'User',
+		'userIdColumn'=>'id',
+		'userNameColumn'=>'username',
+	),
+),
+~~~
+
+* BBii requires a user database table to be present that at least contains an 
+  integer User ID field and a varchar User name field. BBii also expects 
+  Yii::app()->user->id to return the User ID, not the User name. The model for 
+  the user table and the column names for the User ID column and the User name 
+  column are part of the module options.
+* Log in to your application with the user that has the User ID equal to the 
+  value for the option 'adminId’ to acquire administration rights in BBii.
+* Navigate to http://<your base url>/forum. Click the link 'Forum settings’ and 
+  set up the forum.
+
+
+##Options
+
+The following configuration options can be used:
+adminId:        the User ID (integer) for the user to receive the admin 
+                authorization (default value: false). When the application uses 
+				rbac and the role 'admin’ exists the users that get the role 
+				'admin’ assigned will also be admin for BBii.
+avatarStorage:  The directory in which uploaded avatar images are stored relative 
+                to the application webroot directory (leading '/’ required) 
+				(default value: '/avatar').
+forumTitle:     The name for the forum (default value: 'BBii Forum').
+userClass:      The model name of the database table that contains the user 
+                authentication information for User ID and User name (default 
+				value: 'User').
+userIdColumn:   The column name of the User class field that contains the User ID 
+                (default value: 'id').
+userNameColumn: The column name of the User class field that contains the User 
+                name (default value: 'username').
+userMailColumn: The column name of the User class field that contains the User 
+                e-mail address (default value: false).
+
+##Embedded Extensions
+
+* editMe (http://www.yiiframework.com/extension/editme)
+* colorPicker (http://www.eyecon.ro/colorpicker/)
+
+
+##Versions
+
+* v0.1 (Jul. 27, 2013): Initial release.
+* v0.2 (Aug.  1, 2013): Search functionality added.
+* v0.3 (Aug.  4, 2013): User e-mail form added. Session count for statistics.
+* v0.4 (Aug. 18, 2013): Moderator assignment. Member group icons.
+* v0.5 (Aug. 20, 2013): Indicate unread forums and topics.

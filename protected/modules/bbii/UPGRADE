@@ -1,0 +1,27 @@
+﻿BBii 0.5
+==========
+
+Copyright (c) 2013, BBii - Ronald van Belzen. All rights reserved.  
+ - See accompanying LICENSE for license information.
+ 
+ 
+ ## Upgrade from v0.1 to v0.2
+ 
+ All files in bbii-0.2.zip should be copied to replace the existing files.
+ No database changes are involved.
+ 
+ 
+ ## Upgrade from v0.1 or v0.2 to v0.3
+ 
+ All files in bbii-0.3.zip should be copied to replace the existing files.
+ Create database tables according to bbii/data/upgrade-to-version-0-3.mysql.sql 
+ 
+ ## Upgrade from v0.3 to v0.4
+ 
+ All files in bbii-0.4.zip should be copied to replace the existing files.
+ Update database table according to bbii/data/upgrade-to-version-0-4.mysql.sql 
+ 
+ ## Upgrade from v0.4 to v0.5
+ 
+ All files in bbii-0.5.zip should be copied to replace the existing files.
+ Update database table according to bbii/data/upgrade-to-version-0-5.mysql.sql

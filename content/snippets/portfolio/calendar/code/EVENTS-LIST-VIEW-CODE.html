@@ -1,0 +1,38 @@
+var EventsListView = Backbone.View.extend({
+    allDayBgColor: '#767be0',
+    defaultEventBgColor: '#3A87AD',
+    initialize: function() {
+        this.collection.comparator = function(model) {
+            return [model.get('start'), model.get('end')];
+        }
+        this.listenTo(this.collection, 'add', this.addOne);
+        this.listenTo(this.collection, 'change', this.change);
+        this.listenTo(this.collection, 'destroy', this.destroy);
+        this.listenTo(this.collection, 'sync', this.sync);
+    },
+    render: function() {
+        $('#active-events-list').html('');
+        for (i = 0; i < this.collection.length; i++) {
+            var event = this.collection.at(i);
+            var EventListItem = new EventListItemView({
+                model: event
+            });
+            EventListItem.render();
+        }
+    },
+    addAll: function() {
+        this.render();
+    },
+    addOne: function(event) {
+        this.render();
+    },
+    change: function(event) {
+        this.collection.sort();
+    },
+    destroy: function(event) {
+        $('#EventListItem-' + event.get("id")).remove();
+    },
+    sync: function(event) {
+        this.render();
+    }
+}); // end EventsListView

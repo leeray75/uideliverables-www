@@ -1,0 +1,161 @@
+<h3>HTML</h3>
+<div class="code">
+	<pre class="prettyprint linenume">
+    &lt;div ng-app=&quot;TwoWayBindingApp&quot; id=&quot;ng-app&quot; class=&quot;main&quot;&gt;
+      &lt;div ng-controller=&quot;commentsController&quot;&gt;
+        &lt;div class=&quot;row&quot;&gt; 
+          &lt;!-- Update Box --&gt;
+          &lt;div class=&quot;col-xs-8 col-sm-10 col-md-10 col-lg-10&quot;&gt;
+            &lt;textarea name=&quot;submitComment&quot; ng-model=&quot;comment.msg&quot; placeholder=&quot;What are you thinking?&quot;&gt;&lt;/textarea&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;col-xs-4 col-sm-2 col-md-2 col-lg-2&quot;&gt; &lt;a href=&quot;javascript:void(0);&quot; class=&quot;button&quot; ng-click=&quot;addComment(comment)&quot;&gt;POST&lt;/a&gt; &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- Comments --&gt;
+        &lt;div ng-repeat=&quot;comment in comments&quot;&gt;
+          &lt;div class=&quot;updates&quot;&gt; &lt;a href=&quot;javascript:void(0);&quot; ng-click=&quot;deleteComment($index);&quot;&gt;Delete&lt;/a&gt; {{comment.msg}} &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;    
+    </pre>
+ </div> 
+<h3>JavaScript</h3>
+<div class="code">
+  <pre class="prettyprint linenums">
+angular.module('TwoWayBindingApp', [
+	'TwoWayBindingApp.controllers'
+])	
+var TwoWayBindingControllers = angular.module('TwoWayBindingApp.controllers', []);			
+
+TwoWayBindingControllers.controller('commentsController', function ($scope,$http) {
+	var api = "/api/test/index.php";
+	$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+	$http.get(api+"?action=getComments").success(function(data) {
+		$scope.comments = data;
+	});	
+	$scope.addComment = function(comment) {
+		// Validate the comment is not an empty and undefined
+		if ("undefined" != comment.msg) {
+			// Angular AJAX call
+			$http({
+				method: "POST",
+				url: api,
+				data: "action=add&msg=" + comment.msg
+			}).success(function(data) {
+				// Add the data into DOM for future use
+				//$scope.comments.unshift(data);
+				$scope.comments = data;
+			});
+			$scope.comment = "";
+		}
+	}
+
+	// index : index of global DOM
+	$scope.deleteComment = function(index) {
+		// Angular AJAX call
+		$http({
+			method: "GET",
+			url: api+"?action=delete&id=" + $scope.comments[index].id,
+		}).success(function(data) {
+			// Removing Data from Global DOM
+			//$scope.comments.splice(index, 1);
+			$scope.comments = data;
+		});
+	}				
+})// end controllers
+
+
+</pre>
+</div>
+<h3>comment.php</h3>
+<div class="code">
+  <pre class="prettyprint linenums">
+ &lt;?php
+class db
+{
+    
+    const SERVER = "localhost";
+    const USER = "username";
+    const PASSWORD = "password";
+    const DB = "database_name";
+    
+    private static $instance = NULL;
+    private $connection;
+    
+    private function __construct()
+    {
+        $this->connection = mysql_connect(self::SERVER, self::USER, self::PASSWORD);
+        if ($this->connection) {
+            mysql_select_db(self::DB, $this->connection);
+        }
+    }
+    
+    private function __clone()
+    {
+        // to avoid cloning this class
+    }
+    
+    // Secure way to create Database Connection through SINGLETON Model
+    protected static function dbInstance()
+    {
+        if (NULL == self::$instance) {
+            self::$instance = new self;
+        }
+        return self::$instance;
+    }
+}
+
+class comments extends db
+{
+    
+    var $con;
+    
+    public function __construct()
+    {
+        parent::dbInstance();
+    }
+    
+    public function getComments()
+    {
+        $qry  = mysql_query("SELECT comment_id, comments, timestamp FROM comments ORDER BY timestamp DESC");
+        $data = array();
+        while ($rows = mysql_fetch_array($qry)) {
+            $data[] = array(
+                "id" => $rows['comment_id'],
+                "msg" => $rows['comments'],
+                "timestamp" => $rows['timestamp']
+            );
+        }
+        return json_encode($data);
+    }
+    
+    public function addComment($post)
+    {
+        $comments = mysql_real_escape_string($post['msg']);
+        $time     = time();
+        $id       = 0;
+        $qry = mysql_query("INSERT INTO comments(comments,timestamp)VALUES('{$comments}','{$time}')") or die(mysql_error());
+        $id = mysql_insert_id();
+        return $this->getComments();
+        /*
+        return json_encode(array("id" => $id,
+        "msg" => stripslashes($comments),
+        "timestamp" => $time));
+        */
+    }
+    
+    public function deleteComment($id)
+    {
+        (int) $id = mysql_real_escape_string($id);
+        $del = mysql_query("DELETE FROM comments WHERE comment_id = " . $id);
+        return $this->getComments();
+        /*
+        if($del)
+        return true;
+        return false;
+        */
+    }
+    
+}
+?&gt;
+</pre>
+</div>

@@ -1,0 +1,66 @@
+DisplayEventModalOverlayView = Backbone.View.extend({
+    tagName: "div",
+    template: _.template($('#Display-Event-ModalOverlay-Template').html()),
+    id: '#DisplayEventModal',
+    events: {
+        "click .simplemodal-close": "close"
+    },
+    initialize: function() {
+    },
+    render: function() {
+        var jsonModel = this.model.toJSON();
+        var thisObj = this;
+
+        $('#DisplayEventModal').remove();
+
+        if (user.get("isAdmin") == true || (jsonModel["user_id"] != "0" && jsonModel["user_id"] == user.get('id'))) {
+            jsonModel["isEditable"] = true;
+        } else {
+            jsonModel["isEditable"] = false;
+        }
+
+        var template = this.template(jsonModel);
+        $('body').append(template);
+
+        this.initModal();
+        return this;
+    },
+    initDelegateEvents: function() {
+        var thisObj = this;
+        $(this.id + " .delete-model-link").on("click.modal", function() {
+            thisObj.close();
+            var DeleteEventModalOverlay = new DeleteEventModalOverlayView({
+                model: thisObj.model
+            });
+            DeleteEventModalOverlay.render();
+            return false;
+        });
+    },
+    initModal: function() {
+        var thisObj = this;
+        $(this.id).on('shown.bs.modal', function() {
+            thisObj.show();
+        })
+        $.modal = $(this.id).modal();
+
+    },
+    show: function() {
+        var thisObj = this;
+        $(this.id + " .edit-model-link").on("click.modal", function() {
+            thisObj.close();
+            var AddEditEventModalOverlay = new AddEditEventModalOverlayView({
+                model: thisObj.model
+            });
+            AddEditEventModalOverlay.render();
+            return false;
+        });
+        this.initDelegateEvents();
+    },
+    close: function() {
+        $(this.id).off("click.modal", ".do-save-link");
+        $.modal.modal('hide');
+        $(this.id).detach();
+
+    }
+
+}); // end DisplayEventModalOverlayView

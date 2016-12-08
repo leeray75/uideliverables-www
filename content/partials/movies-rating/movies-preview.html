@@ -1,0 +1,96 @@
+<div id="TemplateSpinner" ng-show="previewMovieItem == null"> <img src="/www/content/images/apps/movies/ajax-loader.gif" /> </div>
+<div id="TemplateWrapper" ng-show="previewMovieItem!=null">
+  <form name="AddEditMovieForm" id="AddEditMovieForm" novalidate>
+    <div ng-init="setForm(AddEditMovieForm);"></div>
+    <div id="Movie-Page-Title">
+      <h2>{{ pageTitle }}</h2>
+    </div>
+    <!-- /Movie-Page-Title -->
+    <div class="movie-top-copy">
+      <p>Click on the <span class="editable-color">RED</span> copy below to edit the data. Click on the 'OK' button to save the changes. Click outside of the edit field or the 'Cancel' button to ignore the changes.</p>
+      <p ng-if="movie.id == null || movie.id=='0'">Click on the <span class="add-label-text">'{{ addLabel }}'</span> Button, to add the movie to the list.<br>
+        Click on the <span class="reset-label-text">'{{ resetLabel }}'</span> Button, to reset all the movie data back to the default state.</p>
+        <p ng-show="isDraggable">Drag a image file from your computer onto the poster image to update it.</p>
+        <p>Click on the <span class="edit-label-text">'{{ editLabel }}'</span> button to edit all the movie's attributes.</p>
+    </div>
+    <div id="FORM-ERROR" class="error-container" ng-show="AddEditMovieForm.$submitted && AddEditMovieForm.$invalid">
+      <div class="clearfix" ng-show="AddEditMovieForm.$submitted">
+        <h4>Enter the following:</h4>
+        <ul>
+          <li class="col-xs-6" ng-show="AddEditMovieForm.title.$error.required">Title</li>
+          <li class="col-xs-6" ng-show="AddEditMovieForm.runtime.$error.required">Run Time</li>
+          <li class="col-xs-6" ng-show="AddEditMovieForm.genre.$error.required">Genre</li>
+          <li class="col-xs-6" ng-show="AddEditMovieForm.released.$error.required">Release Date</li>
+          <li class="col-xs-6" ng-show="AddEditMovieForm.plot.$error.required">Plot</li>
+          <li class="col-xs-6" ng-show="AddEditMovieForm.director.$error.required">Director</li>
+          <li class="col-xs-6" ng-show="AddEditMovieForm.writers.$error.required">Writer</li>
+          <li class="col-xs-6" ng-show="AddEditMovieForm.actors.$error.required">Actor</li>
+        </ul>
+      </div>
+      <input  name="title" id="title" ng-model="movie.title" value="" required type="text" class="hidden">
+      <input name="director" id="director" ng-model="movie.director" value="" required type="text" class="hidden">
+      <input name="writers" id="writers" ng-model="movie.writers" value="" required type="text" class="hidden">
+      <input name="actors" id="actors" ng-model="movie.actors" value="" required type="text" class="hidden">
+      <input name="genre" id="genre" ng-model="movie.genre" value="" required type="text" class="hidden">
+      <input name="runtime" id="runtime" ng-model="movie.runtime" value=""  required=""type="text" class="hidden">
+      <input name="released" id="released" ng-model="movie.released" value="" required type="text" class="hidden">
+      <input name="plot" id="plot" ng-model="movie.plot" value="" required type="text" class="hidden">
+    </div>
+    <div id="Movie-Preview-Container" class="editable-preview-container">
+      <div id="#MovieItem-{{previewMovieItem.id}}" class="movie-list-item-container clear-fix row">
+        <div class="row">
+          <div class="image-col col-sm-3">
+          	<div id="Movie-Poster" Movie-Poster ng-class="{noBorder: isDraggable==false}"><img ng-src="{{previewMovieItem.poster}}" class="img-responsive"/></div><!-- /Movie-Poster -->
+          </div>
+          <div class="data-col col-sm-9">
+         
+            <div class="movie-title row editable-text" model-key="title">{{previewMovieItem.title}}
+            	
+            </div>
+            <div class="row ">
+              <div class="col-sm-6 info-column">
+                <div class="row"><span class="movie-label">Rated:</span> <span id="Editable-Select-Rated" class="rated" model-key="rated">{{previewMovieItem.rated}}</span></div>
+                <div class="row"><span class="movie-label">Run Time:</span> <span class="run-time"><span class="editable-text" model-key="runtime">{{previewMovieItem.runtime}}</span> minutes</span></div>
+                <div class="row"><span class="movie-label">{{previewMovieItem.GenreLabel}}:</span> <span class="genre editable-text" model-key="genre">{{previewMovieItem.genre}}</span></div>
+                <div class="row"><span class="movie-label">Release Date: </span> <span class="release-date editable-date masked" model-key="released">{{previewMovieItem.DisplayReleaseDate}}</span></div>
+              </div>
+              <!-- /info-column -->
+              <div class="ratings-column col-sm-6">
+                <div class="ratings-container">
+                
+                  <div class="row"><span class="movie-label">Your Rating:</span> <span id="RateIt-User-Preview" class="rateit bigstars" data-rateit-starwidth="32" data-rateit-starheight="16" rating="0" imdb-rate></span> </div>
+                  <div class="row"> <span class="movie-label">Rating:</span> <span id="IMDb-RateIt" class="rateit bigstars" data-rateit-starwidth="32" data-rateit-starheight="16" data-rating="{{previewMovieItem.imdbRating}}" imdb-rate></span> </div>
+                  <div class="imdb-votes row"> <span class="votes-count">( Rating: {{previewMovieItem.rating}} from {{previewMovieItem.imdbVotes}} users)</span></div>
+                </div>
+                <!-- /ratings-container --> 
+              </div>
+              <!-- /ratings-column --> 
+            </div>
+            <!-- /row -->
+            <div class="plot editable-textarea" model-key="plot">{{previewMovieItem.plot}}</div>
+            <!-- /plot -->
+            <div class="additional-info-rows">
+              <div class="row"><span class="movie-label">{{previewMovieItem.DirectorLabel}}:</span> <span class="directors editable-text" model-key="director">{{previewMovieItem.director}}</span></div>
+              <div class="row"><span class="movie-label">{{previewMovieItem.WriterLabel}}:</span> <span class="writers editable-text" model-key="writers">{{previewMovieItem.writers}}</span></div>
+              <div class="row"><span class="movie-label">{{previewMovieItem.ActorsLabel}}:</span> <span class="actors editable-text" model-key="actors">{{previewMovieItem.actors}}</span></div>
+            </div>
+          </div>
+          <!-- /data-col --> 
+          
+        </div>
+      </div>
+      <!-- /movie-list-item-container -->
+      
+      <div class="button-container"> <span ng-if="movie.id == null || movie.id=='0' "> <span class="btn btn-warning" ng-click="resetMovie()">{{ resetLabel }}</span> <!-- /btn --> 
+        </span> <span> <a class="btn btn-info" ng-click="showMovieForm()">{{ editLabel }}</a> </span> <span ng-if="movie.id == null || movie.id=='0' ">
+        <button class="btn btn-primary" ng-click="addMovie()">{{ addLabel }}</button>
+        </span> 
+      </div>
+    </div>
+    <!-- /Movie-Preview-Container --> 
+    <span class="InlineEditTemplateReady" style="display:none;"></span>
+  </form>
+</div>
+
+<!-- /TemplateWrapper -->
+<dialog-container></dialog-container>

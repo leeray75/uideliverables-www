@@ -1,0 +1,40 @@
+--
+-- Table structure for table `events`
+--
+
+DROP TABLE IF EXISTS `events`;
+CREATE TABLE `events` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `description` varchar(500) default NULL,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL,
+  `allDay` tinyint(1) NOT NULL default '0',
+  `isEditable` tinyint(1) NOT NULL default '1',
+  `isComplete` tinyint(1) NOT NULL default '0',
+  `isActive` tinyint(1) NOT NULL default '1',
+  `location` varchar(250) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=113 ;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` VALUES(80, 0, 'Valentine''s Day', 'Observance', '2015-02-14 00:00:00', '2015-02-14 23:59:00', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(81, 0, 'Presidents'' Day (Washington''s Birthday)', 'National holiday', '2015-02-16 00:00:00', '2015-02-16 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(82, 0, 'Easter Sunday', 'Observance, Christian', '2015-04-05 00:00:00', '2014-04-05 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(83, 0, 'Mothers'' Day', 'Observance', '2015-05-10 00:00:00', '2015-05-10 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(84, 0, 'Memorial Day', 'National holiday', '2015-05-25 00:00:00', '2015-05-25 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(85, 0, 'Fathers'' Day', 'Observance', '2015-06-21 00:00:00', '2015-06-21 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(86, 0, 'Independence Day', 'National holiday', '2015-07-04 00:00:00', '2015-07-04 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(87, 0, 'Labor Day', 'National holiday', '2015-09-07 00:00:00', '2015-09-07 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(88, 0, 'Columbus Day', 'National holiday - All except CA, HI, NV', '2015-10-12 00:00:00', '2015-10-12 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(89, 0, 'Halloween', 'Observance', '2015-10-31 00:00:00', '2015-10-31 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(90, 0, 'Veterans Day', 'National holiday', '2015-11-11 00:00:00', '2015-11-11 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(91, 0, 'Thanksgiving Day', 'National holiday', '2015-11-26 00:00:00', '2015-11-26 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(92, 0, 'Christmas Day', 'National holiday, Christian', '2015-12-25 00:00:00', '2015-12-25 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(93, 0, 'New Year''s Eve', 'Observance', '2015-12-31 00:00:00', '2015-12-31 23:59:59', 1, 0, 0, 1, '');
+INSERT INTO `events` VALUES(107, 3, 'test', '', '2015-02-18 00:00:00', '2015-02-18 00:00:00', 1, 1, 0, 1, '');
+INSERT INTO `events` VALUES(109, 3, 'blah', 'dsfadfsa', '2015-02-21 00:00:00', '2015-02-21 00:00:00', 1, 1, 0, 1, 'dfsfsad');

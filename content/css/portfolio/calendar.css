@@ -1,0 +1,194 @@
+@charset "utf-8";
+/* CSS Document */
+input, button, select, textarea{ color: #000; }
+p#login-info{ margin-top: 1.5em;}
+#Calendar-App{}
+#Calendar-App .row{ padding: 0; margin: 0;}
+#calendar {
+	padding-top: 20px;
+}
+#tabs-container{
+	margin-top: 20px;	
+}
+#calendar .fc-day-header{
+	background: #062A53;
+	color: #fff; font-weight: bold;
+}
+#calendar .fc-day {
+	background: #FFC;	
+}
+#calendar .fc-day .fc-day-number{
+	color: #000;	
+	opacity: 1;
+}
+#calendar .fc-other-month{
+	background: #666;
+}
+
+#calendar .fc-other-month .fc-day-number{
+	color: #fff;	
+	opacity: 1;
+}
+#calendar .fc-event {
+	cursor: pointer;
+}
+#calendar .fc-event:hover {
+	border: #F00 1px solid !important;
+	background-color: #F63;
+	color: #FF9;
+}
+#calendar .fc-event-time{ display: none; }
+#calendar .fc-today{ background: #cccccc;}
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header {
+	margin-bottom: 8px;
+}
+.ui-timepicker-div dl {
+	text-align: left;
+}
+.ui-timepicker-div dl dt {
+	float: left;
+	clear:left;
+	padding: 0 0 0 5px;
+}
+.ui-timepicker-div dl dd {
+	margin: 0 10px 10px 45%;
+}
+.ui-timepicker-div td {
+	font-size: 90%;
+}
+.ui-tpicker-grid-label {
+	background: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+.ui-timepicker-rtl {
+	direction: rtl;
+}
+.ui-timepicker-rtl dl {
+	text-align: right;
+	padding: 0 5px 0 0;
+}
+.ui-timepicker-rtl dl dt {
+	float: right;
+	clear: right;
+}
+.ui-timepicker-rtl dl dd {
+	margin: 0 45% 10px 10px;
+}
+/* css for modal */
+#AddEditEventModal {
+	/* height: 500px; */
+}
+.ui-datepicker-trigger {
+	vertical-align: top;
+	background: #fff;
+	border: 1px solid #fff;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 0 2px 0 2px;
+	margin-left: 5px;
+	cursor: pointer !important;
+}
+#DisplayEventModal label {
+	font-weight: bold;
+}
+
+#AddEditEventModal input#AllDay {
+	margin: 3px 0 0 0;
+	vertical-align:middle;
+}
+
+#AddEditEventModal .all-day-row .input-column{ text-align: left; }
+#AddEditEventModal .input-column input.calendar{ width: 60%; }
+.modal textarea#description{ width: 80%; height: 5em;}
+#DeleteEventModal .modal-body .notify-container{ padding: 25px 0 25px 0; width: 80%;}
+#DeleteEventModal .modal-body .notify-container span.title{ color: #ff0000;}
+
+
+#events-list .event-list-item-container
+{
+	width: 100%;
+	margin: 0 0 20px 0;	
+}
+
+
+#events-list .event-list-item-container .date{   
+	position: relative; 
+	height: 30px;
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+	padding: 5px;
+}
+#events-list .event-list-item-container.non-editable .date
+{
+	 background-color: #c04bd1;
+	 background-image: linear-gradient(to bottom, #c04bd1, #5f1f68); 
+}
+#events-list .event-list-item-container.editable .date
+{
+	 background-color: #0088CC;
+	 background-image: linear-gradient(to bottom, #0088CC, #0044CC);	 		
+}
+
+
+#events-list .event-list-item-container .date .icons-container
+{position: absolute; width: 96px; height: 26px; z-index: 100;  top: 2px; right: 10px; 
+	background: #fff;
+	border: 1px solid #000;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+#events-list .event-list-item-container.non-editable .date .icons-container
+{ width: 26px; }
+#events-list .event-list-item-container .date .icons-container a{ border: none;}
+#events-list .event-list-item-container .date .icons-container a:hover{ text-decoration: none; }
+#events-list .event-list-item-container .date .action-events-icon{
+	position: absolute; z-index: 100; width: 16px; height: 16px; top: 5px;
+	background: url(/www/content/images/icons/add_edit_delete-icons.png) no-repeat;	
+}
+
+#events-list .event-list-item-container.non-editable .date .icons-container .action-events-icon.add-event
+{ right: 5px;}
+#events-list .event-list-item-container .date .action-events-icon.add-event
+{ background-position: 0 0;	right: 74px;}
+#events-list .event-list-item-container .date .action-events-icon.delete-event
+{ background-position: -32px 0;	right: 10px;}
+#events-list .event-list-item-container .date .action-events-icon.edit-event
+{ background-position: -64px 0;	right: 42px;}
+#events-list .event-list-item-container .title{
+	font-weight: bold;	
+	padding: 10px 10px 0 10px;
+}
+#events-list .event-list-item-container .location,
+#events-list .event-list-item-container .description
+
+
+{
+	padding: 10px 10px 0 10px;	
+}
+#events-list .event-list-item-container .description-data
+{
+	padding: 10px 20px 0 100px;	
+}
+
+ @media screen and (max-width: 360px) {
+.modal-container {
+	width: 280px;
+}
+.modal-container .text-area, .modal-container .input-field {
+	width: 200px;
+}
+#AddEditEventModal {
+	height: auto !important;
+}
+.simplemodal-wrap {
+	overflow: visible !important;
+}
+.fc-header-right {
+	display: none;
+}
+}

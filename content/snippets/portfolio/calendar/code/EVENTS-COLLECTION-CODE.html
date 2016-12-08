@@ -1,0 +1,21 @@
+ var EventsCollection = Backbone.Collection.extend({
+     // Reference to this collection's model.
+     model: Event,
+     url: '/www/index.php/api/events',
+     initialize: function() {         
+     },
+     comparator: function(model) {
+         var startDate = new Date(getDateObject(model.get('start')));
+         var endDate = new Date(getDateObject(model.get('end')));         
+         return [model.get('start'), model.get('end')];
+     },
+     setFilter: function(filter) {
+         this.filterFunc = filter;
+     },
+     filter: function() {
+         if (typeof this.filterFunc === 'function') {
+             this.filterFunc();
+         }
+     }
+
+ }); // end EventsCollection 

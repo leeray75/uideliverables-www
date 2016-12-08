@@ -1,0 +1,185 @@
+<div id="TemplateSpinner" ng-show="movie == null"> <img src="/www/content/images/apps/movies/ajax-loader.gif" /> </div>
+<div id="TemplateWrapper" ng-show="movie!=null">
+  <div id="Add-Edit-Movie">
+    <div id="Movie-Page-Title">
+      <h2>{{ pageTitle }}</h2>
+    </div>
+    <div class="movie-top-copy">
+      <p ng-if="movie.id != null && movie.id !='0'">The movie data won't be saved unless you click on the '{{ updateLabel }}' Button.</p>
+      <p ng-if="movie.id == null || movie.id=='0'">Click on the <span class="add-label-text">'{{ addLabel }}'</span> Button, to add the movie to the list.<br>
+        Click on the <span class="reset-label-text">'{{ resetLabel }}'</span> Button, to reset all the movie data back to the default state.</p>
+    </div>
+    <form name="AddEditMovieForm" id="AddEditMovieForm" novalidate>
+    <div ng-init="setForm(AddEditMovieForm);"></div>
+      <div id="Add-Movie-Row-1" class="row">
+        <div id="Add-Movie-Col-1" class="col-sm-6">
+          <div class="input-row row">
+            <div class="label-col col-sm-3 col-xs-4">
+              <label for="title">Title:</label>
+            </div>
+            <div class="input-col col-sm-9 col-xs-8">
+              <input type="text" name="title" id="title" placeholder="Title" ng-model="movie.title" required="" />
+              <div class="check-input-field-container" ng-show="AddEditMovieForm.$submitted || AddEditMovieForm.title.$touched">
+                <div class="error-msg" ng-show="AddEditMovieForm.title.$error.required">Enter a Title.</div>
+              </div><!-- /check-input-field-container -->
+            </div>
+          </div>
+          <div class="input-row row">
+            <div class="label-col col-sm-3 col-xs-4">
+              <label for="director">Director:</label>
+            </div>
+            <div class="input-col col-sm-9 col-xs-8">
+              <input type="text" name="director" id="director" placeholder="Director" ng-model="movie.director" required />
+              <div class="check-input-field-container" ng-show="AddEditMovieForm.$submitted || AddEditMovieForm.director.$touched">
+                <div class="error-msg" ng-show="AddEditMovieForm.director.$error.required">Enter a Director.</div>
+              </div><!-- /check-input-field-container -->
+            </div>
+          </div>
+          <div class="input-row row">
+            <div class="label-col col-sm-3 col-xs-4">
+              <label for="writer">Writers:</label>
+            </div>
+            <div class="input-col col-sm-9 col-xs-8">
+              <input type="text" name="writers" id="writers" placeholder="Writers" ng-model="movie.writers" required />
+              <div class="check-input-field-container" ng-show="AddEditMovieForm.$submitted || AddEditMovieForm.writers.$touched">
+                <div class="error-msg" ng-show="AddEditMovieForm.writers.$error.required">Enter a Writer.</div>
+              </div><!-- /check-input-field-container -->
+            </div>
+          </div>
+          <div class="input-row row">
+            <div class="label-col col-sm-3 col-xs-4">
+              <label for="actors">Actors:</label>
+            </div>
+            <div class="input-col col-sm-9 col-xs-8">
+              <input type="text" name="actors" id="actors" placeholder="Actors separated by commas" ng-model="movie.actors" required />
+              <div class="check-input-field-container" ng-show="AddEditMovieForm.$submitted || AddEditMovieForm.actors.$touched">
+                <div class="error-msg" ng-show="AddEditMovieForm.actors.$error.required">Enter Actors.</div>
+              </div><!-- /check-input-field-container -->
+            </div>
+          </div>
+          <div class="input-row row">
+            <div class="label-col col-sm-3 col-xs-4">
+              <label for="genre">Genre:</label>
+            </div>
+            <div class="input-col col-sm-9 col-xs-8">
+              <input type="text" name="genre" id="genre" placeholder="Genres separated by commas" ng-model="movie.genre" required />
+              <div class="check-input-field-container" ng-show="AddEditMovieForm.$submitted || AddEditMovieForm.genre.$touched">
+                <div class="error-msg" ng-show="AddEditMovieForm.genre.$error.required">Enter a Genre.</div>
+              </div><!-- /check-input-field-container -->
+            </div>
+          </div>
+          <div class="input-row row">
+            <div class="label-col col-sm-3 col-xs-4">
+              <label for="rated">Rated:</label>
+            </div>
+            <div class="input-col col-sm-9 col-xs-8">
+              <select ng-model="movie.rated" name="rated" id="rated">
+                <option value="G">G</option>
+                <option value="PG">PG</option>
+                <option value="PG-13">PG-13</option>
+                <option value="R">R</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- /Add-Movie-Col-1 -->
+        <div id="Add-Movie-Col-2" class="col-sm-6">
+          <div class="input-row row">
+            <div class="label-col col-xs-4">
+              <label for="runtime">Run Time:</label>
+            </div>
+            <div class="input-col col-xs-8">
+              <input type="text" name="runtime" id="runtime" placeholder="Run Time In Minutes" ng-model="movie.runtime" class="numeric-field" required />
+              <div class="check-input-field-container" ng-show="AddEditMovieForm.$submitted || AddEditMovieForm.runtime.$touched">
+                <div class="error-msg" ng-show="AddEditMovieForm.runtime.$error.required">Enter Run Time.</div>
+              </div><!-- /check-input-field-container -->
+            </div>
+          </div>
+          <div class="input-row row">
+            <div class="label-col col-xs-4">
+              <label for="released">Release Date:</label>
+            </div>
+            <div class="input-col col-xs-8">
+              <input type="text" name="released" id="released" placeholder="MM-DD-YYYY" maxlength="10" ng-model="previewMovieItem.DisplayReleaseDate" class="masked-date" required />
+              <div class="check-input-field-container" ng-show="AddEditMovieForm.$submitted || AddEditMovieForm.released.$touched">
+                <div class="error-msg" ng-show="AddEditMovieForm.released.$error.required">Enter Released Date.</div>
+              </div><!-- /check-input-field-container -->
+            </div>
+          </div>
+          <div class="input-row row">
+            <div class="label-col col-xs-4">
+              <label for="year">Year:</label>
+            </div>
+            <div class="input-col col-xs-8">
+              <input type="text" name="year" id="year" placeholder="YYYY" maxlength="4" ng-model="movie.year" class="masked-year" />
+            </div>
+          </div>
+          <div class="input-row row">
+            <div class="label-col col-xs-4">
+              <label for="imdbRating">Rating:</label>
+            </div>
+            <div class="input-col col-xs-8">
+              <input type="text" name="imdbRating" id="imdbRating" placeholder="Rating" ng-model="movie.imdbRating" class="numeric-field" />
+            </div>
+          </div>
+          <div class="input-row row">
+            <div class="label-col col-xs-4">
+              <label for="imdbVotes">Votes:</label>
+            </div>
+            <div class="input-col col-xs-8">
+              <input type="text" name="imdbVotes" id="imdbVotes" placeholder="# of Votes" ng-model="movie.imdbVotes" class="numeric-field" />
+            </div>
+          </div>
+        </div>
+        <!-- /Add-Movie-Col-2 --> 
+      </div>
+      <!-- /Add-Movie-Row-1 -->
+      <div id="Add-Movie-Row-2">
+        <div class="input-row row">
+          <div class="label-col col-sm-3 col-xs-4">
+            <label for="imdbID">IMDB ID:</label>
+          </div>
+          <div class="input-col col-sm-9 col-xs-8">
+            <input type="text" name="imdbID" id="imdbID" placeholder="IMDB ID" ng-model="movie.imdbID" />
+          </div>
+        </div>
+        <div class="input-row row">
+          <div class="label-col col-sm-3 col-xs-4">
+            <label for="poster">Poster:</label>
+          </div>
+          <div class="input-col col-sm-9 col-xs-8">
+            <input type="text" name="poster" id="poster" placeholder="Poster URL Location" ng-model="movie.poster" required />
+            <div class="check-input-field-container" ng-show="AddEditMovieForm.$submitted || AddEditMovieForm.poster.$touched">
+                <div class="error-msg" ng-show="AddEditMovieForm.poster.$error.required">Enter a Poster URL Location.</div>
+              </div><!-- /check-input-field-container -->
+          </div>
+        </div>
+        <div class="input-row row">
+          <div class="label-col col-sm-3 col-xs-4">
+            <label for="plot">Plot:</label>
+          </div>
+          <div class="input-col col-sm-9 col-xs-8">
+            <textarea name="plot" id="plot" ng-model="movie.plot" required ></textarea>
+            <div class="check-input-field-container" ng-show="AddEditMovieForm.$submitted || AddEditMovieForm.plot.$touched">
+                <div class="error-msg" ng-show="AddEditMovieForm.plot.$error.required">Enter a Plot.</div>
+              </div><!-- /check-input-field-container -->
+          </div>
+        </div>
+      </div>
+      <!-- /Add-Movie-Row-2 -->
+      <div class="row">
+        <div class="button-container" movie-id="{{movie.id}}"> <span>
+          <span class="btn btn-warning" ng-click="resetMovie()">Reset Movie</span><!-- /btn -->
+          </span> <span>
+          <a class="btn btn-info" ng-click="previewMovie()">Inline Edit</a>
+          </span> <span ng-if="movie.id == null || movie.id=='0'">
+          <button class="btn btn-primary" ng-click="addMovie()">{{ addLabel }}</button>
+          </span> <span ng-if="movie.id != null && movie.id !='0'">
+          <button class="btn btn-primary" ng-click="updateMovie()">{{ updateLabel }}</button>
+          </span> </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- /TemplateWrapper --> 
+<dialog-container></dialog-container>

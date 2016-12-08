@@ -1,0 +1,62 @@
+<div id="TemplateSpinner" ng-show="movies == null"> <img src="/www/content/images/apps/movies/ajax-loader.gif" /> </div>
+<div id="TemplateWrapper" ng-show="movies!=null">
+  <div id="Movie-Page-Title">
+    <h2>{{ pageTitle }}</h2>
+  </div>
+  <div class="movies-search-container">
+    <div class="row">
+      <div class="col-xs-12">
+        <form id="MovieTitlesSearchForm">
+          <div class="movie-search-field"> <span class="glyphicon glyphicon-search"></span>
+            <input id="MovieTitleSearchFilterField" type="text" ng-model="titleFilter" placeholder="Search Movie Titles & Plots" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <ul id="movies-list">
+    <li ng-repeat="movie in movies | filter: moviesSearchFilter | orderBy: 'title' ">
+      <div id="#MovieItem-{{movie.imdbID}}" class="movie-list-item-container clear-fix row">
+        <div class="row">
+          <div class="image-col col-sm-3"> <img name="PosterImage-{{movie.imdbID}}" ng-src="{{movie.poster}}" class="img-responsive"/>
+            <div class="edit-delete-links" ng-if="movie.allowDeleteEdit"><a href="#/edit/preview/{{movie.id}}" class="btn btn-primary">Edit</a> <a href="" ng-click="deleteMovie(movie)" class="btn btn-danger">Delete</a></div>
+          </div>
+          <div class="data-col col-sm-9">
+            <div class="movie-title row"> {{movie.title}} </div>
+            <div class="row ">
+              <div class="col-sm-6 info-column">
+                <div class="row"><span class="movie-label">Rated:</span> <span class="rated">{{movie.rated}}</span></div>
+                <div class="row"><span class="movie-label">Run Time:</span> <span class="run-time">{{movie.runtime}} minutes</span></div>
+                <div class="row"><span class="movie-label">{{movie.GenreLabel}}:</span> <span class="genre">{{movie.genre}}</span></div>
+                <div class="row"><span class="movie-label">Release Date: </span> <span class="release-date">{{movie.DisplayReleaseDate}}</span></div>
+              </div>
+              <!-- /info-column -->
+              <div class="ratings-column col-sm-6">
+                <div class="ratings-container">
+                  <div class="row"><span class="movie-label">Your Rating:</span> <span id="RateIt-{{movie.id}}" class="rateit bigstars" data-rateit-starwidth="32" data-rateit-starheight="16" rating="0" imdb-user-rate></span> </div>
+                  <div class="row"> <span class="movie-label">Rating:</span> <span id="IMDb-RateIt-{{movie.id}}" class="rateit bigstars" data-rateit-starwidth="32" data-rateit-starheight="16" data-rating="{{movie.rating}}" imdb-rate></span> </div>
+                  <div class="imdb-votes row"> <span class="votes-count">( Rating: {{movie.rating}} from {{movie.imdbVotes}} users)</span></div>
+                </div>
+                <!-- /ratings-container --> 
+              </div>
+              <!-- /ratings-column --> 
+            </div>
+            <!-- /row -->
+            <div class="plot row"> {{movie.plot}} </div>
+            <!-- /plot -->
+            <div class="additional-info-rows">
+              <div class="row"><span class="movie-label">{{movie.DirectorLabel}}:</span> <span class="directors">{{movie.director}}</span></div>
+              <div class="row"><span class="movie-label">{{movie.WriterLabel}}:</span> <span class="writers">{{movie.writers}}</span></div>
+              <div class="row"><span class="movie-label">{{movie.ActorsLabel}}:</span> <span class="actors">{{movie.actors}}</span></div>
+            </div>
+          </div>
+          <!-- /data-col --> 
+          
+        </div>
+      </div>
+    </li>
+  </ul>
+  <!-- /movies-list --> 
+</div>
+<!-- /TemplateWrapper --> 
+<dialog-container></dialog-container>

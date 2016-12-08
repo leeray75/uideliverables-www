@@ -1,0 +1,234 @@
+AddEditEventModalOverlayView = Backbone.View.extend({
+    tagName: "div",
+    template: _.template($('#AddEdit-Event-ModalOverlay-Template').html()),
+    id: "#AddEditEventModal",
+
+    initialize: function() {},
+    render: function() {
+        var jsonModel = this.model.toJSON();
+        var thisObj = this;
+        $(this.id).remove();
+        var jsonModel = this.model.toJSON();
+        var template = this.template(jsonModel);
+        $('body').append(template);
+
+        this.initModal();
+        return this;
+    },
+    initModal: function() {
+        var thisObj = this;
+        $(this.id).on('shown.bs.modal', function() {
+            thisObj.show();
+        })
+        $.modal = $(this.id).modal();
+    },
+    show: function(dialog) {
+        this.initDateTimePickerPlugin();
+        this.initNobleCountPlugin();
+        this.initDelegateEvents();
+
+    },
+
+    initDelegateEvents: function() {
+        var thisObj = this;
+        $(this.id + ' .do-save-link').on("click.modal", function() {
+            thisObj.save();
+            return false;
+        });
+        $(this.id + " .delete-model-link").on("click.modal", function() {
+            thisObj.close();
+            var DeleteEventModalOverlay = new DeleteEventModalOverlayView({
+                model: thisObj.model
+            });
+            DeleteEventModalOverlay.render();
+            return false;
+        });
+    },
+    save: function() {
+        var thisObj = this;
+
+        var StartDateVal = $('#StartDate').val();
+        var EndDateVal = $('#EndDate').val();
+        var StartTime = StartDateVal.split(" ")[1] + ":00 " + StartDateVal.split(" ")[2];
+        var EndTime = EndDateVal.split(" ")[1] + ":00 " + EndDateVal.split(" ")[2];
+
+        StartTime = getMilitaryTime(StartTime);
+        EndTime = getMilitaryTime(EndTime);
+
+        var StartDate = StartDateVal.split(" ")[0];
+        var EndDate = EndDateVal.split(" ")[0];
+
+        var allDay = $('#AllDay').is(":checked") ? true : false;
+        var dateArray = StartDate.split("/");
+        StartDate = dateArray[2] + "-" + dateArray[0] + "-" + dateArray[1];
+        dateArray = EndDate.split("/");
+        EndDate = dateArray[2] + "-" + dateArray[0] + "-" + dateArray[1];
+
+        var StartDateObj = getDateObject(StartDate + " " + StartTime);
+        var EndDateObj = getDateObject(EndDate + " " + EndTime);
+
+        if (StartDateObj > EndDateObj) {
+            alert("End Date & Time must be greater than Start Date & Time\n" + StartDate + " " + StartTime + "\n" + EndDate + " " + EndTime);
+        } else if (this.model.isNew()) {
+
+            var newModel = new Event();
+            newModel.set('title', $('#title').val());
+            newModel.set('description', $('#description').val());
+            newModel.set('location', $('#location').val());
+            newModel.set('start', StartDate + " " + StartTime);
+            newModel.set('end', EndDate + " " + EndTime);
+            newModel.set('allDay', allDay);
+            newModel.set('user_id', user.get('id'));
+
+            App.collection.create(newModel, {
+                wait: true,
+                success: function(data) {
+
+                    if (data.get("errorMessage") != null) {
+                        alert(data.get("errorMessage"));
+                    } else {
+                        if ($('#file').exists() && $('#file').val().length > 0) {
+                            thisObj.uploadFile(newModel.get("id"));
+                        } else {
+                            thisObj.close();
+                        }
+                    }
+                }, // end success
+                error: function(model, response) {
+                    var data = $.parseJSON(response.responseText);
+                    if (data.errorMessage != null) {
+                        alert(response.status + " : " + $(data.errorMessage).text());
+
+                        if (response.status == "401") {
+                            thisObj.close();
+                            location.reload();
+                        }
+                    } else {
+                        alert("Unknown Error");
+                    }
+                }
+            });
+        } // end if (this.model.isNew())
+        else {
+            var newModel = new Event();
+            newModel.set('id', this.model.get('id'));
+            newModel.set('title', $('#title').val());
+            newModel.set('description', $('#description').val());
+            newModel.set('location', $('#location').val());
+            newModel.set('start', StartDate + " " + StartTime);
+            newModel.set('end', EndDate + " " + EndTime);
+            newModel.set('allDay', allDay);
+            newModel.set('isEditable', this.model.get('isEditable'));
+            newModel.set('isComplete', this.model.get('isComplete'));
+            newModel.set('user_id', this.model.get('user_id'));
+
+            this.model.save(newModel, {
+                success: function(data) {
+                    if (data.get("errorMessage") != null) {
+                        alert(data.get("errorMessage"));
+                        return false;
+                    } else {
+                        thisObj.close();
+                        return true;
+                    }
+                }, // end success
+                error: function(model, response) {
+                    try {
+                        var data = $.parseJSON(response.responseText);
+                        if (data.errorMessage != null) {
+                            alert(response.status + " : " + data.errorMessage);
+                            if (response.status == "401") {
+                                thisObj.close();
+                                location.reload();
+                            }
+                        } else {
+                            alert("Unknown Error");
+                        }
+                    } catch (e) {
+                        alert("Unknown Error");
+                    }
+                }
+            });
+        }
+    },
+    close: function() {
+        $(this.id).off("click.modal", ".do-save-link");
+        $.modal.modal('hide');
+        $(this.id).detach();
+    },
+    delete: function() {
+
+    },
+    initNobleCountPlugin: function() {
+        var maxChar = $('#description').attr("maxlength");
+        $('#description').NobleCount('#description-counter', {
+            max_chars: maxChar,
+            block_negative: true
+
+        });
+    },
+    initDateTimePickerPlugin: function() {
+
+        var thisObj = this;
+        var CalendarIcon = '/www/content/images/icons/date-picker-icon.png';
+        var CalendarOptions = {
+            showOn: "both",
+            buttonText: "",
+            timeFormat: 'h:mm TT',
+            dateFormat: 'mm/dd/yy',
+            beforeShow: getCustomRange,
+            firstDay: 0,
+            changeFirstDay: false,
+            buttonImage: CalendarIcon,
+            buttonImageOnly: true,
+            showButtonPanel: false,
+            hour: "00",
+            minute: "00"
+        }
+        var startDate = this.model.get('start');
+        var startTime = startDate.split(" ")[1];
+        var startTimeArray = startTime.split(":");
+        var startHour = startTimeArray[0];
+        var startMinute = startTimeArray[1];
+        CalendarOptions.hour = startHour;
+        CalendarOptions.minute = startMinute;
+        $('#StartDate').datetimepicker(CalendarOptions);
+
+        var endDate = this.model.get('end');
+        var endTime = startDate.split(" ")[1];
+        var endTimeArray = endTime.split(":");
+        var endHour = endTimeArray[0];
+        var endMinute = endTimeArray[1];
+        CalendarOptions.hour = endHour;
+        CalendarOptions.minute = endMinute;
+
+        $('#EndDate').datetimepicker(CalendarOptions);
+
+        function getCustomRange() {
+
+            var id = $(this).attr('id');
+            var time = " 00:00:00";
+            var dateString;
+            if (id == "StartDate") {
+                var endDate = $("#EndDate").val();
+                var dateTimeArray = endDate.split(" ");
+                var dateArray = dateTimeArray[0].split("/");
+                endDate = dateArray[2] + "-" + dateArray[0] + "-" + dateArray[1];
+                dateString = endDate.trim().length > 0 ? endDate + time : GlobalVariables.CalendarMaxDate;
+                return {
+                    maxDate: getDateObject(dateString)
+                }
+            } else {
+                var startDate = $("#StartDate").val();
+                var dateTimeArray = startDate.split(" ");
+                var dateArray = dateTimeArray[0].split("/");
+                startDate = dateArray[2] + "-" + dateArray[0] + "-" + dateArray[1];
+                dateString = startDate.trim().length > 0 ? startDate + time : GlobalVariables.CalendarMinDate;
+                return {
+                    minDate: getDateObject(dateString)
+                }
+            }
+        }
+
+    }
+}); // end AddEditEventModalOverlayView

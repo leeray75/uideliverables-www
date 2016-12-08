@@ -1,0 +1,372 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	font-family:Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	color: #000;
+}
+p {
+	padding-bottom: 1em;
+	line-height: 1.2em;
+}
+h1 {
+	font-size: 28px !important;
+}
+h2 {
+	font-size: 24px;
+}
+h3 {
+	font-size: 20px;
+}
+h4 {
+	font-size: 16px;
+}
+textarea {
+	resize: none;
+}
+.clear-fix:after, .clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.row {
+	margin: 0px !important;
+}
+#fixed-header {
+	position:fixed;
+	margin: 0 auto;
+	z-index:2000;
+	width:100%;
+	top: 0;
+	left: 0;
+}
+
+.site-container {
+	width: 100%;
+}
+.content-container {
+	width: 980px;
+	margin: 0 auto 0 auto;
+	padding: 0px;
+	word-wrap:break-word;
+	position: relative;
+}
+.breadcrumbs,
+#content{ padding: 0 10px 0 10px; }
+#content{ width: 960px; overflow: hidden;}
+.simplemodal-overlay {
+	background-color:rgba(0, 0, 0, 0.5)
+}
+header, header > section {
+	width: 100%;
+	background: #cccccc;
+}
+header > section > .content-container {
+	height: 75px;
+}
+header #logo {
+	width: 347px;
+	height: 65px;
+	position: absolute;
+	top: 10px;
+	left: 0px;
+}
+header #logo.mobile{
+	left: 85px;	
+}
+header #logo a.uideliverables-logo {
+	background: url(/www/content/images/global/logo-UIDeliverables.png) 0 0 no-repeat;
+	display: block;
+	width: 347px;
+	height: 55px;
+}
+header #logo a.uideliverables-logo span {
+	display: none;
+}
+#sidr-menu{ position: absolute; 
+	top: 10px; left: 20px; 
+	background: url(/www/content/images/icons/icon-sidr-menu.png) no-repeat;
+	width: 55px; 
+	height: 55px;
+	display: none;
+}
+#sidr-menu:hover{ text-decoration: none; }
+header #Google-Search-Container
+{ position: absolute; width: 300px; bottom: -5px; right: 20px; }
+#sidr #Google-Search-Container
+{ position: relative; width: 240px; margin: 20px 0 0 0; } 
+#Google-Search-Container .gsc-control-cse
+{ 
+	background-color: transparent !important; 
+	border: none;
+	padding: 5px; 
+}
+#Google-Search-Container .gsc-input-box 
+{
+	border: 1px solid #062A53;	
+	border-radius:5px;
+	-moz-border-radius: 5px;
+}
+
+#Google-Search-Container table.gsc-search-box td{
+	vertical-align: top;
+}
+#Google-Search-Container table.gsc-search-box td .gsc-input{
+	color: #000;	
+}
+#Google-Search-Container .gsc-search-button 
+{
+	background-color: #006DCC;
+	background-image: linear-gradient(to bottom, #0088CC, #0044CC);
+	background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);	
+	border-radius:5px;
+	-moz-border-radius: 5px;
+	padding: 0 5px 2px 5px;	
+}
+#Google-Search-Container  .gsc-results-wrapper-overlay  .gsc-result .gs-title
+{ overflow: visible;}
+#user-nav-view-container,
+header > nav{ 
+	display: none; 
+}
+
+footer {
+	width: 100%;
+	background: #ccc;
+	padding: 10px 0 10px 0;
+	text-align: center;
+	color: #062a53;
+	font-size: 12px;
+	line-height: 1.5em;
+	box-shadow: 0 4px 2px -2px gray;
+}
+nav {
+	width: 100%;
+	background: #062a53;
+	box-shadow: 0 4px 2px -2px gray;
+	padding-top: 7px;
+}
+nav a,
+nav a:visited,
+nav a:active,
+nav a:link {
+	color: #fff;
+	text-decoration: none;
+	padding: 5px 10px 5px 10px;
+	display: block;
+	
+}
+nav a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+nav ul {
+	width: 100%;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+nav ul li {
+	float: left;
+	border-right: 1px solid #fff;
+	border-left: 1px solid #fff;
+	border-top: 1px solid #fff;
+	border-top-left-radius: 10px 10px;
+	border-top-right-radius: 10px 10px;
+	background: #999;
+}
+nav ul li:hover, nav ul li.active {
+	background: #006DCC;
+}
+#user-nav-links {
+	position: absolute;
+	top: 0px;
+	right: 40px;
+	background: #062A53;
+	border: 1px solid #000;
+	border-right: 1px solid #000;
+	border-left: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-bottom-left-radius: 10px 10px;
+	border-bottom-right-radius: 10px 10px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+#user-nav-links a {
+	color: #fff;
+	text-decoration: none;
+}
+#user-nav-links a:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+#user-nav-links ul {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+#user-nav-links ul li {
+	float: left;
+	border-left: 1px solid #eee;
+	padding: 0 10px 0 10px;
+}
+#user-nav-links ul li:first-child {
+	border-left: none;
+}
+section#main {	
+	
+	margin-bottom: 20px !important;
+}
+
+
+#linkedin-plugin-container {
+	position: absolute;
+	z-index: 10;
+	top: 0px;
+	left: 10px;
+}
+ @media print {
+h1 {
+	font-size: 20px;
+}
+h2 {
+	font-size: 18px;
+}
+h3 {
+	font-size: 16px;
+}
+h4 {
+	font-size: 14px;
+}
+section#main {
+	margin: 0px !important;
+	font-size: 12px;
+}
+section#main .site-container {
+	box-shadow: none;
+}
+section#main .content-container {
+	width: 100%;
+}
+header, footer, .breadcrumbs, .resource-box {
+	display: none;
+}
+}
+ @viewport {
+ zoom: 1.0;
+ width: extend-to-zoom;
+}
+@-ms-viewport {
+ width: extend-to-zoom;
+ zoom: 1.0;
+}
+@media screen and (min-width: 980px) {
+.content-container {
+	width: 980px;
+}
+#content{ width: 960px; }
+}
+ @media screen and (max-width: 360px) {
+header #logo {
+	left: 10px;
+}
+header #logo a.uideliverables-logo {
+	width: 80px;
+	overflow: hidden;
+}
+.resource-box {
+	display: none;
+}
+
+.content-container {
+	padding: 0 !important;
+}
+
+ [class*="span"] {
+ float: none;
+margin: 0 auto 10px auto;
+}
+}
+@media screen and (min-width: 361px) and (max-width: 480px) {
+.resource-box {
+	display: none;
+}
+
+header {
+	position: static;
+}
+
+ [class*="span"] {
+ float: none;
+margin: 0 auto 10px auto;
+}
+}
+
+ @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* For general iPad layouts */
+
+	
+	.resource-box {
+	display: none;
+}
+section#main,  nav, .breadcrumbs,  .content-container,  .row {
+	width: 760px;
+	overflow: hidden;
+}
+section#main #content {
+	width: 740px !important;
+	margin: 0 auto 0 auto;
+}
+.span4 {
+	width: 210px;
+}
+.span4.box p, .span4.box h2 {
+	width: 180px !important;
+	margin: 0 auto 0 auto;
+}
+ [class*="span"] {
+ float: left;
+margin: 0;
+}
+}
+ @media only screen and (max-device-width : 320px) and (orientation : portrait) { /* iPhone 5 */
+nav {
+	font-size: 10px;
+}
+img.uideliverables-logo {
+	width: 70%;
+}
+.resource-box {
+	display: none;
+}
+
+header {
+	position: static;
+}
+
+ [class*="span"] {
+ float: none;
+margin: 0 auto 10px auto;
+}
+}
+
+
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : landscape) { /* iPhone 5 */
+
+.resource-box {
+	display: none;
+}
+
+}
+@media only screen and (min-width : 569px) and (max-width : 680px) and (orientation : landscape) {
+
+.resource-box {
+	display: none;
+}
+
+
+
+}

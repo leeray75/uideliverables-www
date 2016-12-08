@@ -1,0 +1,237 @@
+<script type="text/template" id="AddEdit-Event-ModalOverlay-Template">
+<%
+	var showRemoveLink = false;
+	try{
+		showRemoveLink = !(id==null);
+	}catch(e){ showRemoveLink = false; }
+	var startDateArray = start.split(" ");	
+	var startDate = (startDateArray[0].length>0) ? startDateArray[0] : GlobalVariables.CurrentDate.split(" ")[0];				
+	var endDateArray = end.split(" ");
+	var endDate =  (endDateArray[0].length>0) ? endDateArray[0] : GlobalVariables.CurrentDate.split(" ")[0];		
+	var StartTime = (startDateArray[0].length>0) ? startDateArray[1] : "01:00:00";		
+	var EndTime = (endDateArray[0].length>0) ? endDateArray[1] : "01:00:00";
+	var location = location || "";	
+	var dateArray = startDate.split("-");
+	var isAllDayCheckedProp = allDay==true ? " checked='checked' " : "";
+	startDate = dateArray[1]+"/"+dateArray[2]+"/"+dateArray[0];
+	dateArray = endDate.split("-");
+	endDate = dateArray[1]+"/"+dateArray[2]+"/"+dateArray[0];
+	
+	StartTime = getFormattedTime(StartTime);
+	EndTime = getFormattedTime(EndTime);
+	title = title.replace(/"/g, '&quot;');
+	location = location.replace(/"/g, '&quot;');
+	description = description.replace(/"/g, '&quot;');
+
+
+%>
+<div id="AddEditEventModal" class="modal-container">
+    <div class="content-wrapper">
+      <div class="content-container">
+        <h3>Event Details</h3>
+        <div class="formContainer">
+          <form id="AddEditEventForm">
+            <div class="input-row clear-fix">
+              <label>Title:</label>
+              <div class="input-container">
+                <input maxlength="250" id='title' class="input-field" type="text" value="<%= title %>" />
+              </div>
+              <!-- /input-container --> 
+            </div>
+			<!-- /input-row -->
+			<div class="input-row clear-fix">
+			<input type="checkbox" name="AllDay" id="AllDay" value="1" <%= isAllDayCheckedProp %> /> <label for="AllDay">All Day</label>
+			</div>
+			<div class="input-row clear-fix">
+			  <div class="span3">
+              <label for="StartDate">Start Date:</label>
+              <div class="input-container">
+                <input type="text" name="StartDate" id="StartDate" class="startDate calendar" readonly='readonly' value="<%= startDate %> <%= StartTime %>" />
+				</div>
+				<!-- /input-container -->
+				
+				</div>
+              <!-- /span3 -->
+			  <div class="span3">
+					 <label for="EndDate">End Date:</label>
+					  <div class="input-container">
+						<input type="text" name="EndDate" id="EndDate" class="endDate calendar" readonly='readonly' value="<%= endDate %> <%= EndTime %>" />
+						</div>
+					  <!-- /input-container --> 				
+				</div>
+				<!-- /span3 --> 
+            </div>
+<!--
+            <div class="input-row clear-fix">
+              <label>File:</label>
+              <div class="input-container">
+                <input maxlength="250" id='file' class="input-field" type="file" accept="image/*" value="" />
+              </div>
+            </div>
+-->
+			<!-- /input-row -->	
+            <div class="input-row clear-fix">
+              <label>Location:</label>
+              <div class="input-container">
+                <input maxlength="250" id='location' class="input-field" type="text" value="<%= location %>" />
+              </div>
+              <!-- /input-container --> 
+            </div>
+			<!-- /input-row -->			
+            <div class="input-row clear-fix">
+              <label>Description:</label>
+			  <div class="input-container">
+              <textarea id="description" class="text-area" maxlength="500"><%= description %></textarea>
+			  	<div class="counter-line">(<span id="description-counter"></span> characters remaining)</div>
+			  </div>
+			  <!-- /input-container -->
+            </div>
+            <!-- /input-row -->
+            <div class="buttons-container"> 
+			<% if(showRemoveLink){ %>
+				<a href="#" class="delete-model-link">Remove</a>
+			<% } %>
+			<a href="#" class="btn btn-warning cancelButton simplemodal-close">Cancel</a>
+			<a href="#" class="btn btn-success do-save-link saveButton">Save</a> </div>
+            <!-- /buttonsContainer -->
+          </form>
+          <!-- /OnlineShoppingDatesOverlayForm --> 
+        </div>
+        <!-- /formContainer --> 
+      </div>
+      <!-- /contentContainer --> 
+    </div>
+    <!-- /contentWrapper --> 
+</div>
+<!-- AddEditEventModal -->
+  </script>
+
+<script type="text/template" id="Display-Event-ModalOverlay-Template">
+<%
+	var showRemoveLink = false;
+	try{
+		showRemoveLink = !(id==null);
+	}catch(e){ showRemoveLink = false; }
+	var startDateArray = start.split(" ");	
+	var startDate = (startDateArray[0].length>0) ? startDateArray[0] : GlobalVariables.CurrentDate.split(" ")[0];				
+	var endDateArray = end.split(" ");
+	var endDate =  (endDateArray[0].length>0) ? endDateArray[0] : GlobalVariables.CurrentDate.split(" ")[0];		
+	var StartTime = (startDateArray[0].length>0) ? startDateArray[1] : "01:00:00";		
+	var EndTime = (endDateArray[0].length>0) ? endDateArray[1] : "01:00:00";
+	var location = location || "";	
+	var dateArray = startDate.split("-");
+	var isAllDay = allDay==true ? "Yes" : "No";
+	var closeButtonClass = (isEditable==1) ? "closeButton1" : "closeButton2";
+	startDate = dateArray[1]+"/"+dateArray[2]+"/"+dateArray[0];
+	dateArray = endDate.split("-");
+	endDate = dateArray[1]+"/"+dateArray[2]+"/"+dateArray[0];
+	
+	StartTime = getFormattedTime(StartTime);
+	EndTime = getFormattedTime(EndTime);
+	title = title.replace(/"/g, '&quot;');
+	location = location.replace(/"/g, '&quot;');
+	description = description.replace(/"/g, '&quot;');
+	
+
+
+%>
+<div id="DisplayEventModal" class="modal-container">
+    <div class="content-wrapper">
+      <div class="content-container">
+        <h3>Event Details</h3>
+        <div class="formContainer">
+          <form id="DisplayEventForm">
+            <div class="input-row clear-fix">
+              <label>Title:</label>
+              <div class="input-container">
+                <span class="value"><%= title %></span>
+              </div>
+              <!-- /input-container --> 
+            </div>
+			<!-- /input-row -->
+			<div class="input-row clear-fix">
+			<label id="all-day-label">All Day:</label> <span class="value"><%= isAllDay %></span>
+			</div>
+			<div class="input-row clear-fix">
+			  <div class="span3">
+              <label for="StartDate">Start Date:</label>
+              <div class="input-container">
+                <span class="value"><%= startDate %> <%= StartTime %></span>
+			   </div>
+				<!-- /input-container -->
+				
+				</div>
+              <!-- /span3 -->
+			  <div class="span3">
+					 <label for="EndDate">End Date:</label>
+					  <div class="input-container">
+						<span class="value"><%= endDate %> <%= EndTime %></span>
+						</div>
+					  <!-- /input-container --> 				
+				</div>
+				<!-- /span3 --> 
+            </div>
+
+            <div class="input-row clear-fix">
+              <label>Location:</label>
+              <div class="input-container">
+                <span class="value"><%= location %></span>
+              </div>
+              <!-- /input-container --> 
+            </div>
+			<!-- /input-row -->			
+            <div class="input-row clear-fix">
+              <label>Description:</label>
+			  <div class="input-container">
+              <textarea id="description" class="text-area" maxlength="500" readonly="readonly"><%= description %></textarea>
+			  	</div>
+			  </div>
+			  <!-- /input-container -->
+            </div>
+            <!-- /input-row -->
+            <div class="buttons-container"> 
+			
+			<a href="#" class="btn btn-warning <%=closeButtonClass %> simplemodal-close">Close</a>
+			<% if(isEditable==1){ %>
+				<a href="#" class="btn btn-success editButton edit-model-link">Edit</a>
+			<% } %>			
+			</div>
+            <!-- /buttonsContainer -->
+          </form>
+          <!-- /OnlineShoppingDatesOverlayForm --> 
+        </div>
+        <!-- /formContainer --> 
+      </div>
+      <!-- /contentContainer --> 
+    </div>
+    <!-- /contentWrapper --> 
+</div>
+<!-- AddEditEventModal -->
+  </script>
+  
+<script type="text/template" id="Delete-Event-ModalOverlay-Template">
+<div id="DeleteEventModal" class="modal-container">
+    <div class="content-wrapper">
+      <div class="content-container">
+        <h3>Remove Event</h3>
+        <div class="formContainer">
+			<div class="notify-container">
+				Delete <%= title %>?
+			</div>
+			<!-- /notify-container -->
+            
+            <div class="buttons-container"> 
+			<a href="#" class="btn btn-warning cancelButton simplemodal-close">Cancel</a>
+			<a href="#" class="btn btn-danger do-delete-link deleteButton">Delete</a> </div>			 
+			</div>
+            <!-- /buttonsContainer -->
+
+        </div>
+        <!-- /formContainer --> 
+      </div>
+      <!-- /content-container --> 
+    </div>
+    <!-- /content-wrapper --> 
+</div>
+<!-- /DeleteEventModal -->
+  </script>
