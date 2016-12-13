@@ -8955,3 +8955,41 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/www/index.php/%27/www/content/partials/global/login-modal.html%27
 ---
+2016/12/13 13:53:32 [error] [php] DOMDocument::load(http://tympanus.net/codrops/feed/): failed to open stream: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ (C:\Servers\htdocs\www\protected\views\site\index.php:120)
+Stack trace:
+#0 C:\Servers\htdocs\YiiRoot\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#1 C:\Servers\htdocs\YiiRoot\framework\web\CController.php(870): SiteController->renderFile()
+#2 C:\Servers\htdocs\YiiRoot\framework\web\CController.php(783): SiteController->renderPartial()
+#3 C:\Servers\htdocs\www\protected\controllers\SiteController.php(97): SiteController->render()
+#4 C:\Servers\htdocs\YiiRoot\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
+#5 C:\Servers\htdocs\YiiRoot\framework\web\CController.php(309): CInlineAction->runWithParams()
+#6 C:\Servers\htdocs\YiiRoot\framework\web\CController.php(287): SiteController->runAction()
+#7 C:\Servers\htdocs\YiiRoot\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#8 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(283): SiteController->run()
+#9 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#10 C:\Servers\htdocs\YiiRoot\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#11 C:\Servers\htdocs\www\index.php(13): CWebApplication->run()
+REQUEST_URI=/www/
+in C:\Servers\htdocs\www\protected\views\site\index.php (120)
+in C:\Servers\htdocs\www\protected\controllers\SiteController.php (97)
+in C:\Servers\htdocs\www\index.php (13)
+2016/12/13 13:56:23 [error] [php] DOMDocument::load(http://tympanus.net/codrops/feed/): failed to open stream: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ (C:\Servers\htdocs\www\protected\views\site\index.php:120)
+Stack trace:
+#0 C:\Servers\htdocs\YiiRoot\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#1 C:\Servers\htdocs\YiiRoot\framework\web\CController.php(870): SiteController->renderFile()
+#2 C:\Servers\htdocs\YiiRoot\framework\web\CController.php(783): SiteController->renderPartial()
+#3 C:\Servers\htdocs\www\protected\controllers\SiteController.php(97): SiteController->render()
+#4 C:\Servers\htdocs\YiiRoot\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
+#5 C:\Servers\htdocs\YiiRoot\framework\web\CController.php(309): CInlineAction->runWithParams()
+#6 C:\Servers\htdocs\YiiRoot\framework\web\CController.php(287): SiteController->runAction()
+#7 C:\Servers\htdocs\YiiRoot\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#8 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(283): SiteController->run()
+#9 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#10 C:\Servers\htdocs\YiiRoot\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#11 C:\Servers\htdocs\www\index.php(13): CWebApplication->run()
+REQUEST_URI=/www/
+in C:\Servers\htdocs\www\protected\views\site\index.php (120)
+in C:\Servers\htdocs\www\protected\controllers\SiteController.php (97)
+in C:\Servers\htdocs\www\index.php (13)
