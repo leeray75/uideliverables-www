@@ -89,7 +89,7 @@ if(!$crawler){
 <body>
 <div id="page" data-role="page">
   <?php include "includes/header.php" ?>
-  <section id="main" class="container" data-role="content">
+  <main class="container" data-role="content">
       <?php if(isset($this->breadcrumbs)):?>
       <?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
@@ -98,8 +98,8 @@ if(!$crawler){
       
       <?php endif?>
       <?php echo $content; ?> 
-  </section>
-  <!-- /main --> 
+  </main>
+
 </div>
 <!-- page -->
 <footer data-role="footer">
