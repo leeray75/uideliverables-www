@@ -16,7 +16,6 @@ else{
 	);	
 	$this->pageJS = array(
 		"/www/content/js/pages/portfolio.js",
-		"/www/content/js/pages/demos.js",
 	);	
     $this->metaKeyWords = "demos, portfolio, html, css, javascript, jquery, ajax, code, samples";
     $this->metaDescription = "A list of sites and other projects I've coded recently.";
