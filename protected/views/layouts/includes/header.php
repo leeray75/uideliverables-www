@@ -15,6 +15,7 @@
           <li><a href="/www/index.php/site/contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
           <li class="dropdown"><a href="/www/index.php/demo" data-toggle="dropdown" class="dropdown-toggle"><span class="glyphicon glyphicon-list-alt" ariah-hidden="true"></span> Demos<span class="caret"></span></a>
             <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            	<li><a href="https://plnkr.co/edit/Sr9PH4" target="_blank"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"> </span> AngularJS 1.5: Tour of Heroes (Plunker)</a></li>
               <li><a href="/www/index.php/demo/angular-movies-spa"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"> </span> Angular: Movie Single Page Application</a></li>
               <li><a href="/www/index.php/demo/backbone-calendar"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"> </span> Backbone: Event Calendar</a></li>
               <li><a href="/www/index.php/demo/bootstrap-skill-junction"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"> </span> Bootstrap: Skill Junction</a></li>
