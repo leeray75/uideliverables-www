@@ -7,8 +7,8 @@
 	$this->pageJS = array(
 		"/www/content/js/resume.js",
 	);
-$this->metaKeyWords = "resume, html, css, javascript, jquery, ajax, json, frontend, front-end, developer, AngularJS, Backbone.js, Bootstrap";
-$this->metaDescription = "Raymond Lee's resume. Front-End web developer. Experience with HTML, CSS, JavaScript, jQuery, AngularJS, Backbone.js,  Bootstrap, and JSON.";
+$this->metaKeyWords = "resume, html, html5, css, css3, javascript, jquery, ajax, json, frontend, front-end, developer, AngularJS, Backbone.js, Bootstrap";
+$this->metaDescription = "Raymond Lee's resume. Front-End web developer. Experience with HTML/HTML5, CSS/CSS3, JavaScript, jQuery, AngularJS, Backbone.js,  Bootstrap, and JSON.";
 $this->pageTitle=Yii::app()->name . ' - Frontend Web Developer - Raymond Lee\'s Resume';
 $this->breadcrumbs=array(
 	'Resume',
