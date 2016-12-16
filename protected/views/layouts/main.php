@@ -17,7 +17,7 @@
 <?php /* @var $this Controller */ 
 	include_once "includes/check-crawlers.php"; 
 	echo "<!-- isSSL: ".$this->isSSL." -->";
-	
+	/*
 	if ( (isset($this->isSSL) and $this->isSSL === true) and (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on')) {
 		if(!headers_sent()) {
 			header("Status: 301 Moved Permanently");
@@ -44,6 +44,7 @@
 			}
 		}
 	}
+	*/
 
 
 ?>
