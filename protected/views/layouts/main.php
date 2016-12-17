@@ -60,13 +60,14 @@ if(isset($_GET["demo"]) and ($_GET["demo"] == "angular-movies-rating"))
 }else{
 	echo('<html lang="en">');
 }
+
+$canonicalHref = 'https://'.$_SERVER['HTTP_HOST'].parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
+$canonicalHref = str_replace('//','/',str_replace('index.php','',$canonicalHref));
 ?>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--
-<meta name="google-site-verification" content="EPIlhr6_ScpRyrPBAia0j6H8ooaKOa4Y8nmF9SrSZv4" />
--->
+<link rel="canonical" href="<?php echo $canonicalHref ?>" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 <link href='//fonts.googleapis.com/css?family=Lobster|Open+Sans:400,300,300italic,600,400italic,600italic,700,700italic,800,800italic|Roboto+Condensed:400,300,300italic,400italic,700,700italic|Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic|PT+Sans:400,400italic,700,700italic|Droid+Serif:400,400italic,700,700italic|Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic|Merriweather:400,300,300italic,400italic,700,700italic,900,900italic|Play:400,700' rel='stylesheet' type='text/css'>
 <?php if(isset($this->metaDescription)): ?>

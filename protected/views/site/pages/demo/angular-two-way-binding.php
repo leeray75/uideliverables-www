@@ -34,47 +34,46 @@ $this->pageJS = array(
 
 $this->metaKeyWords = "html, css, javascript, jquery, ajax, json, php, mysql, database, mvc, demo, angularjs, two way data binding";
 $this->metaDescription = "A demo of AngularJS and Two Way Data Binding.";
-$this->pageTitle=Yii::app()->name . ' - Demo: Two Way Data Binding';
+$this->pageTitle=Yii::app()->name . ': AngularJS - Two Way Data Binding';
 $this->breadcrumbs=array(
 	'Demos'=>array('/demo'), 
 	'Two Way Data Binding'
 );
 ?>
-
-<section class="top-content clear-fix row">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="top-copy">
-      <h1>Two Way Data Binding - AngularJS</h1>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/two-way-binding/top-copy.html"; ?>
-    </div>
-    <!-- /top-copy --> 
-  </div>
-</section>
-<!-- /top-content -->
-<h3>DEMO</h3>
-<div class="code">
-  <div id="TWO-WAY-BINDING">
-    <div ng-app="TwoWayBindingApp" id="ng-app" class="main">
-      <div ng-controller="commentsController">
-        <div class="row"> 
-          <!-- Update Box -->
-          <div class="col-xs-8 col-sm-10 col-md-10 col-lg-10">
-            <textarea name="submitComment" ng-model="comment.msg" placeholder="What are you thinking?"></textarea>
+<article itemscope itemtype="http://schema.org/Article">
+    <section class="top-content clear-fix">
+        <div class="top-copy">
+          <h1 itemprop="name">AngularJS: Two Way Data Binding</h1>
+          <div itemprop="description">
+          <?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/two-way-binding/top-copy.html"; ?>
           </div>
-          <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2"> <a href="javascript:void(0);" class="button" ng-click="addComment(comment)">POST</a> </div>
         </div>
-        <!-- Comments -->
-        <div ng-repeat="comment in comments">
-          <div class="updates"> <a href="javascript:void(0);" ng-click="deleteComment($index);">Delete</a> {{comment.msg}} </div>
+        <!-- /top-copy -->
+    </section>
+    <!-- /top-content -->
+    <h3>DEMO</h3>
+    <div class="code">
+      <div id="TWO-WAY-BINDING">
+        <div ng-app="TwoWayBindingApp" id="ng-app" class="main">
+          <div ng-controller="commentsController">
+            <div class="row"> 
+              <!-- Update Box -->
+              <div class="col-xs-8 col-sm-10">
+                <textarea name="submitComment" ng-model="comment.msg" placeholder="What are you thinking?"></textarea>
+              </div>
+              <div class="col-xs-4 col-sm-2"> <a href="javascript:void(0);" class="button" ng-click="addComment(comment)">POST</a> </div>
+            </div>
+            <!-- Comments -->
+            <div ng-repeat="comment in comments">
+              <div class="updates"> <a href="javascript:void(0);" ng-click="deleteComment($index);">Delete</a> {{comment.msg}} </div>
+            </div>
+          </div>
         </div>
       </div>
+      <!-- /#TWO-WAY-BINDING --> 
     </div>
-  </div>
-  <!-- /#TWO-WAY-BINDING --> 
-</div>
-<section class="clear-fix row">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/two-way-binding/bottom-copy.html"; ?>
-  </div>
-  </div>
-</section>
+    <section class="clear-fix row">
+        <?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/two-way-binding/bottom-copy.html"; ?>
+    
+    </section>
+</article>

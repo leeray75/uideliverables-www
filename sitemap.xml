@@ -1,45 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+      xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9
+            https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 <url>
-  <loc>http://www.uideliverables.com/www/</loc>
+  <loc>https://www.uideliverables.com/www/</loc>
 </url>
 <url>
-  <loc>http://www.uideliverables.com/www/index.php/resume</loc>
+  <loc>https://www.uideliverables.com/www/resume</loc>
 </url>
 <url>
-  <loc>http://www.uideliverables.com/www/index.php/site/contact</loc>
+  <loc>https://www.uideliverables.com/www/site/contact</loc>
 </url>
 <url>
-  <loc>http://www.uideliverables.com/www/index.php/demo</loc>
+  <loc>https://www.uideliverables.com/www/demo</loc>
 </url>
 <url>
-  <loc>http://www.uideliverables.com/www/index.php/demo/angular-movies-spa</loc>
+  <loc>https://www.uideliverables.com/www/demo/angular-movies-spa</loc>
 </url>
 <url>
-  <loc>http://www.uideliverables.com/www/index.php/demo/backbone-calendar</loc>
+  <loc>https://www.uideliverables.com/www/demo/backbone-calendar</loc>
 </url>
 <url>
-  <loc>http://www.uideliverables.com/www/index.php/demo/bootstrap-skill-junction</loc>
+  <loc>https://www.uideliverables.com/www/demo/bootstrap-skill-junction</loc>
 </url>
 <url>
-  <loc>http://www.uideliverables.com/www/index.php/demo/bootstrap-am-waste-services</loc>
+  <loc>https://www.uideliverables.com/www/demo/bootstrap-am-waste-services</loc>
 </url>
 <url>
-  <loc>http://www.uideliverables.com/www/index.php/demo/angular-two-way-binding</loc>
+  <loc>https://www.uideliverables.com/www/demo/angular-two-way-binding</loc>
 </url>
 <url>
-  <loc>http://www.uideliverables.com/www/index.php/demo/angular-movies-rating</loc>
+  <loc>https://www.uideliverables.com/www/demo/angular-movies-rating</loc>
 </url>
 <url>
-  <loc>http://www.uideliverables.com/www/index.php/demo/backbone-movies-rating</loc>
-</url>
-<url>
-  <loc>http://www.uideliverables.com/www/index.php</loc>
+  <loc>https://www.uideliverables.com/www/demo/backbone-movies-rating</loc>
 </url>
 </urlset>

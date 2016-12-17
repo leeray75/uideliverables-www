@@ -8993,3 +8993,75 @@ REQUEST_URI=/www/
 in C:\Servers\htdocs\www\protected\views\site\index.php (120)
 in C:\Servers\htdocs\www\protected\controllers\SiteController.php (97)
 in C:\Servers\htdocs\www\index.php (13)
+2016/12/17 18:13:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "demo/{{item.Poster}}".' in C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php:287
+Stack trace:
+#0 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(142): CWebApplication->runController('demo/{{item.Pos...')
+#1 C:\Servers\htdocs\YiiRoot\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\Servers\htdocs\www\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/www/index.php/demo/%7B%7Bitem.Poster%7D%7D
+HTTP_REFERER=http://localhost/www/index.php/demo/angular-movies-rating
+---
+2016/12/17 18:15:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "demo/{{item.Poster}}".' in C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php:287
+Stack trace:
+#0 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(142): CWebApplication->runController('demo/{{item.Pos...')
+#1 C:\Servers\htdocs\YiiRoot\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\Servers\htdocs\www\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/www/index.php/demo/%7B%7Bitem.Poster%7D%7D
+HTTP_REFERER=http://localhost/www/index.php/demo/angular-movies-rating
+---
+2016/12/17 18:17:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "demo/{{item.Poster}}".' in C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php:287
+Stack trace:
+#0 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(142): CWebApplication->runController('demo/{{item.Pos...')
+#1 C:\Servers\htdocs\YiiRoot\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\Servers\htdocs\www\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/www/index.php/demo/%7B%7Bitem.Poster%7D%7D
+HTTP_REFERER=http://localhost/www/index.php/demo/angular-movies-rating
+---
+2016/12/17 18:18:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "demo/{{item.Poster}}".' in C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php:287
+Stack trace:
+#0 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(142): CWebApplication->runController('demo/{{item.Pos...')
+#1 C:\Servers\htdocs\YiiRoot\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\Servers\htdocs\www\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/www/index.php/demo/%7B%7Bitem.Poster%7D%7D
+HTTP_REFERER=http://localhost/www/index.php/demo/angular-movies-rating
+---
+2016/12/17 18:18:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "demo/{{item.Poster}}".' in C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php:287
+Stack trace:
+#0 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(142): CWebApplication->runController('demo/{{item.Pos...')
+#1 C:\Servers\htdocs\YiiRoot\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\Servers\htdocs\www\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/www/index.php/demo/%7B%7Bitem.Poster%7D%7D
+HTTP_REFERER=http://localhost/www/index.php/demo/angular-movies-rating
+---
+2016/12/17 18:18:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "demo/{{item.Poster}}".' in C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php:287
+Stack trace:
+#0 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(142): CWebApplication->runController('demo/{{item.Pos...')
+#1 C:\Servers\htdocs\YiiRoot\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\Servers\htdocs\www\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/www/index.php/demo/%7B%7Bitem.Poster%7D%7D
+HTTP_REFERER=http://localhost/www/index.php/demo/angular-movies-rating
+---
+2016/12/17 18:44:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "demo/{{item.Poster}}".' in C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php:287
+Stack trace:
+#0 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(142): CWebApplication->runController('demo/{{item.Pos...')
+#1 C:\Servers\htdocs\YiiRoot\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\Servers\htdocs\www\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/www/index.php/demo/%7B%7Bitem.Poster%7D%7D
+HTTP_REFERER=http://localhost/www/index.php/demo/angular-movies-rating
+---
+2016/12/17 18:55:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "demo/{{item.Poster}}".' in C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php:287
+Stack trace:
+#0 C:\Servers\htdocs\YiiRoot\framework\web\CWebApplication.php(142): CWebApplication->runController('demo/{{item.Pos...')
+#1 C:\Servers\htdocs\YiiRoot\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\Servers\htdocs\www\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/www/index.php/demo/%7B%7Bitem.Poster%7D%7D
+HTTP_REFERER=http://localhost/www/index.php/demo/angular-movies-rating
+---

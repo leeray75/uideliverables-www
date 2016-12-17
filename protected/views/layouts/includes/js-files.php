@@ -1,8 +1,8 @@
 <!-- <script src="//code.jquery.com/jquery-1.10.1.min.js" async="true"></script> -->
 <script language="javascript">
 var user = user || {};
-var UserNav = UserNav || {};
 var GlobalVariables = GlobalVariables || {};
+GlobalVariables.environment = <?php echo (strpos($_SERVER['HTTP_HOST'], 'uideliverables.com') !== false) ? '"production"' : '"local"' ?>;
 </script>
 <?php 
 if(isset($_GET["demo"]) and (strpos($_GET["demo"],'-movies-') !== false))

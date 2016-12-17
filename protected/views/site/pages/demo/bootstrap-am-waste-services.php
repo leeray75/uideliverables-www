@@ -14,7 +14,7 @@ $this->pageJS = array(
 
 $this->metaKeyWords = "html, css, javascript, jquery, bootstrap, less, demo, portfolio";
 $this->metaDescription = "A demo of a Bootstrap website demo for AM Waste Services";
-$this->pageTitle=Yii::app()->name . ' - Bootstrap Demo: AM Waste Services';
+$this->pageTitle=Yii::app()->name . ': Bootstrap Demo: AM Waste Services';
 $this->breadcrumbs=array(
 	'Demos'=>array('/demo'), 
 	'Bootstrap: AM Waste Services'

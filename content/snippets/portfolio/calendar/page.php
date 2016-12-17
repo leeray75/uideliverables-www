@@ -1,12 +1,12 @@
+<article itemscope itemtype="http://schema.org/Article">
 <div id="Calendar-App">
   <section class="top-content clear-fix row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="top-copy">
-        <h1>Events Calendar Demo with Backbone.js</h1>
-        <?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/calendar/top-copy.html"; ?>
+        <h1 itemprop="name"> Backbone.js: Events Calendar Demo</h1>
+        <div itemprop="description"><?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/calendar/top-copy.html"; ?></div>
       </div>
       <!-- /top-copy --> 
-    </div>
+
   </section>
   <!-- /top-content -->
   <ul class="nav nav-tabs" role="tablist">
@@ -34,11 +34,12 @@
       <!-- /tabs-container --> 
     </div>
     <!-- /demo tab-pane -->
-    <div role="tabpanel" class="tab-pane" id="details">
+    <div role="tabpanel" class="tab-pane" id="details" itemprop="articleBody">
       <?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/calendar/details.php"; ?>
     </div>
   </div>
   <!-- /tab-content --> 
 </div>
 <!-- /Calendar-App --> 
+</article>
 

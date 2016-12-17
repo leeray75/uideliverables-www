@@ -68,6 +68,8 @@ button.rateit-reset{ display: none !important;}
 	visibility: hidden;
 }
 
+#tabs-container{ margin-top: 20px; }
+
 @media (max-width: 767px) {
 #MoviesListView .ratings-container .row{ text-align:left}
 #MoviesListView .ratings-container .row.imdb-votes{ text-align: left;}

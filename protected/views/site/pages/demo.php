@@ -19,7 +19,7 @@ else{
 	);	
     $this->metaKeyWords = "demos, portfolio, html, css, javascript, jquery, ajax, code, samples";
     $this->metaDescription = "A list of sites and other projects I've coded recently.";
-    $this->pageTitle=Yii::app()->name . ' - Portfolio';
+    $this->pageTitle=Yii::app()->name . ': Portfolio';
     $this->breadcrumbs=array(
         'Demos',
     );

@@ -38,18 +38,20 @@ $this->pageJS = array(
 
 $this->metaKeyWords = "html, css, javascript, jquery, ajax, json, angularjs, movies, ratings REST";
 $this->metaDescription = "A problem and solution to a movies rating problem";
-$this->pageTitle=Yii::app()->name . ' - Demo: Movies Rating Demo';
+$this->pageTitle=Yii::app()->name . ': AngularJS - Movies Rating Demo';
 $this->breadcrumbs=array(
 	'Demos'=>array('/demo'), 
 	'Movies Rating'
 );
 ?>
 
-<section class="top-content clear-fix row">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<section class="top-content clear-fix" itemscope itemtype="http://schema.org/Article">
+  <div>
     <div class="top-copy">
-      <h1>Movies Rating - AngularJS</h1>
+      <h1 itemprop="name">AngularJS: Movies Rating</h1>
+      <div itemprop="articleBody">
       <?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/movies-rating/top-copy-angular.html"; ?>
+      </div>
     </div>
     <!-- /top-copy --> 
   </div>

@@ -9,7 +9,7 @@
 	);
 $this->metaKeyWords = "resume, html, html5, css, css3, javascript, jquery, ajax, json, frontend, front-end, developer, AngularJS, Backbone.js, Bootstrap";
 $this->metaDescription = "Raymond Lee's resume. Front-End web developer. Experience with HTML/HTML5, CSS/CSS3, JavaScript, jQuery, AngularJS, Backbone.js,  Bootstrap, and JSON.";
-$this->pageTitle=Yii::app()->name . ' - Frontend Web Developer - Raymond Lee\'s Resume';
+$this->pageTitle=Yii::app()->name.': Raymond Lee\'s Resume - Front End Web Developer ';
 $this->breadcrumbs=array(
 	'Resume',
 );

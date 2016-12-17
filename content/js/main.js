@@ -20,6 +20,9 @@ UI = {
 		GlobalVariables.CurrentDate = year+"-"+month+"-"+day+" 00:00:00";
 		this.initLogInOutLinks();
 		this.initDocument();
+		if(GlobalVariables.environment==="local"){
+			this.updateLocalLinks();
+		}
 	},
 	initDocument: function(){
 		/* collapse bootstrap's navbar when user clicks outside of it */
@@ -30,6 +33,15 @@ UI = {
 				$("button.navbar-toggle").click();
 			}
 		});		
+	},
+	updateLocalLinks: function(){
+		console.log("update");
+		$('a[href^="/www"]:not(a[href^="/www/index.php"])').each(function(index, element) {
+			var $el = $(element);
+            var href =$el.attr('href');
+			href = href.replace("/www","/www/index.php");
+			$el.attr('href',href);
+        });
 	},
 	updateUser: function(){
 		var hdr = UI.services.getUser()

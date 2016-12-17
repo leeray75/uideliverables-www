@@ -1,12 +1,10 @@
-
-<section class="top-content row">
-  <div class="col-xs-12">
+<article itemscope itemtype="http://schema.org/Article">
+<section class="top-content">
     <div class="top-copy">
-      <h1>Movies Single Page Application Demo with AngularJS</h1>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/movies-rating/top-copy-angular-v2.html"; ?>
+      <h1 itemprop="name">AngularJS: Movies Single Page Application Demo</h1>
+      <div itemprop="description"><?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/movies-rating/top-copy-angular-v2.html"; ?></div>
     </div>
     <!-- /top-copy --> 
-  </div>
 </section>
 <!-- /top-content -->
 <ul class="nav nav-tabs" role="tablist">
@@ -18,7 +16,7 @@
   <div role="tabpanel" class="tab-pane active" id="demo">
     <section id="MoviesListView">
       <div ng-app="moviesApp">
-        <div id="MoviesAppRow" class="row">
+        <div id="MoviesAppRow" class="clearfix">
           <div id="MoviesSideNavColumn" class="col-md-2">
             <aside id="MoviesNavContainer" ng-controller="asideMenuController">
               <div id="Movie-Collapse-Menu">
@@ -44,8 +42,9 @@
     </section>
   </div>
   <!-- /demo tab-pane -->
-  <div role="tabpanel" class="tab-pane" id="details">
+  <div role="tabpanel" class="tab-pane" id="details" itemprop="articleBody">
     <?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/movies-rating/details-angular-v2.php"; ?>
   </div>
 </div>
 <!-- /tab-content --> 
+</article>

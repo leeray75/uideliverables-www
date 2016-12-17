@@ -56,7 +56,7 @@ $this->pageJS = array(
 
 $this->metaKeyWords = "html, css, javascript, jquery, ajax, json, AnglarJS, movies, ratings, REST";
 $this->metaDescription = "A movies demo with AngularJS SPA (Single Page Application).";
-$this->pageTitle=Yii::app()->name . ' - Movies Single Page Application Demo with AngularJS';
+$this->pageTitle=Yii::app()->name . ': AngularJS - Movies Single Page Application';
 $this->breadcrumbs=array(
 	'Demos'=>array('/demo'), 
 	'Movies - AngularJS SPA'

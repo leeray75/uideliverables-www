@@ -24,25 +24,23 @@ $this->pageJS = array(
 
 $this->metaKeyWords = "html, css, javascript, jquery, ajax, json, backbone.js, movies, ratings REST";
 $this->metaDescription = "A problem and solution to a movies rating problem";
-$this->pageTitle=Yii::app()->name . ' - Demo: Movies Rating Demo';
+$this->pageTitle=Yii::app()->name . ': Backbone.js - Movies Rating Demo';
 $this->breadcrumbs=array(
 	'Demos'=>array('/demo'), 
 	'Movies Rating'
 );
 ?>
-
-<section class="top-content clear-fix row">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<article itemscope itemtype="http://schema.org/Article">
+<section class="top-content clear-fix">
   <div class="top-copy">
-    <h1>Movies Rating - backbone.js</h1>
-    <?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/movies-rating/top-copy.html"; ?>
+    <h1 itemprop="name">Backbone.js: Movies Rating</h1>
+    <div itemprop="articleBody"><?php include $_SERVER['DOCUMENT_ROOT']."/www/content/snippets/portfolio/movies-rating/top-copy.html"; ?></div>
   </div>
   <!-- /top-copy --> 
-  </div>
 </section>
 <!-- /top-content -->
 
-<section id="tabs-container" class="row">
+<section id="tabs-container">
   <div role="tabpanel"> 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">

@@ -9,7 +9,7 @@
 	$this->pageJS = array(
 		"/www/assets/16495a84/jquery.yiiactiveform.js",
 	);
-$this->pageTitle=Yii::app()->name . ' - Contact Me';
+$this->pageTitle=Yii::app()->name . ': Contact Me';
 $this->metaKeyWords="contact,questions,comments,suggestions,email";
 $this->metaDescription="Please feel free to contact me if you have any questions, comments, or suggestions. I will receive everything sent through this contact form.";
 $this->breadcrumbs=array(

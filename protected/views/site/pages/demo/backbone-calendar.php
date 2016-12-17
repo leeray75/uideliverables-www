@@ -29,7 +29,7 @@ $this->pageJS = array(
 
 $this->metaKeyWords = "html, css, javascript, jquery, ajax, json, backbone.js, fullcalendar, calendar, events, REST";
 $this->metaDescription = "An events calendar developed with Backbone.js and FullCalendar";
-$this->pageTitle=Yii::app()->name . ' - Demo: Calendar';
+$this->pageTitle=Yii::app()->name . ': Backbone.js - Calendar';
 $this->breadcrumbs=array(
 	'Demos'=>array('/demo'), 
 	'Calendar'
